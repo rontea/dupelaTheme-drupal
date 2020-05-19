@@ -25,25 +25,39 @@
   @see https://twig.symfony.com/doc/1.x/tags/macro.html
 #}
 {{ menus.menu_links(items, attributes, 0) }}
-
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes }} class="navbar-nav">
+      <ul class="navbar-nav">
+    {% else %}
+      <ul class="dropdown-menu drop-down-primary" aria-labelledby="navbarDropdown">
     {% endif %}
     {% for item in items %}
-      <li{{ item.attributes }} class="nav-item">
+        {% if item.below  %}
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ item.title}} </a>
+           {{ menus.menu_links(item.below, attributes, menu_level + 1) }} 
+        {% else %}
+        
+         {% if menu_level == 0 %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{item.url}}">
+              {{ item.title }}
+            </a>
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
 
-        <a class="nav-link" href="{{item.url}}">
-          {{ item.title }}
-        </a>
-
-        {% if item.below %}
+        {% else %}
+         <li>
+            <a class="dropdown-item" href="{{item.url}}">
+              {{ item.title }}
+            </a>
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
-      </li>
+          
+        {% endif %}
+        </li>
     {% endfor %}
-    </ul>
+      </ul>
   {% endif %}
 {% endmacro %}

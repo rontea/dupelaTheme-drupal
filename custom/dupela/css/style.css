@@ -11769,7 +11769,7 @@ readers do not read off random characters that represent icons */
   padding: 2vw; }
 
 header .row {
-  margin: auto !important; }
+  margin: auto !important;  }
 
 header .top-header {
   max-width: 1280px;
@@ -11777,7 +11777,7 @@ header .top-header {
   header .top-header .logo-top-header {
     height: 40px;
     width: 40px;
-    background-image: url(../img/Dupela40x40Black.png); }
+    background-image: url(images/DupelaLogo40x40.png); }
   header .top-header .col {
     padding: 0 !important; }
   header .top-header .social-wrap {
@@ -11866,7 +11866,7 @@ header .bottom-header {
       border-left: 3px solid #FF0000; }
 
 header .logo {
-  background-image: url(../img/DupelaLogo40x40.png);
+  background-image: url(images/DupelaLogo40x40.png);
   background-repeat: no-repeat;
   margin-top: 5px;
   width: 40px;
