@@ -1,0 +1,22 @@
+$text-404 : 10em;
+$text-coming-soon: 5em;
+$text-under-maintenance: 5em;
+
+$type-error : ("404" : $text-404,
+    "coming-soon" : $text-coming-soon,
+    "maintenance" : $text-under-maintenance,
+);
+
+.error-message {
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+}
+
+.coming-soon-wrap {
+
+    .cover-img {
+        height: 100%;
+    }
+}

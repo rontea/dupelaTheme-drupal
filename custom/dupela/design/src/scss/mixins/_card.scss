@@ -1,0 +1,133 @@
+.card {
+
+    position: relative;
+    // dark mode
+    &.dark {
+        background-color: $p-color-lighten;
+        color: $p-color-white;
+
+        .avatar {
+
+            &.bordered {
+                img {
+                    border: .7vw solid $p-color-lighten;
+                }
+            }
+            
+        }
+
+        .card-text {
+            color: $p-color-white;
+            opacity: 90%;
+        }
+
+        .card-top{
+            &.card-top-shadowed {
+                box-shadow:  5px 11px 0 $p-color-lighten, 0 4px 15px 0 $p-color-lighten;
+            }
+            
+        }
+
+        .icon-circle-effect {
+            box-shadow: 0 5px 11px 0 $p-color-darken, 0 4px 15px 0 $p-color-darken;
+        }
+    
+    }
+
+    .card-top {
+        
+        position: absolute;
+        width: 100%;
+        height: 30%;
+        z-index: 100;
+
+        // effect shadow need more information 
+        &.card-top-shadowed {
+            box-shadow:  5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+        }
+        
+    }
+
+    .avatar {
+        z-index: 200;
+        &.bordered {
+            img {
+            
+                border: .7vw solid #fff;
+            }
+        }
+
+        &.img-fit {
+            img {
+                max-height: 186px;
+                max-width: 186px;
+                @include img-fit-cover;
+            }
+        }
+    }
+
+    .avatar-top {
+        position: relative;
+        top: -4vw;
+        margin-top: 2vw;
+    }
+
+    .card-sub-title {
+        color: $p-color-1;
+    }
+
+    .card-text {
+        color: $p-color-lighten;
+    }
+
+    .card-body {
+
+        .btn-card-icon {
+            width: 47px;
+            height: 47px;
+            margin: 10px;
+            border-radius: 50%;
+            vertical-align: middle;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            
+            .i {
+                font-size:1.25rem; // 20px
+                height: 47px;
+                display: inline-block !important;
+            }
+        }
+
+        .icon-circle-effect {
+            box-shadow: 0 5px 11px 0 $p-color-3, 0 4px 15px 0 $p-color-3;
+        }
+
+    }
+
+
+    &.no-border {
+        border: none;
+    }
+    &.card-effect-shadow {
+        box-shadow:  5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    }
+    &.avatar-left {
+        padding: 4px;
+
+        .avatar {
+            @include img-100;
+            max-width: 200px;
+        }
+    }
+    .avatar , .avatar-box {
+       img {
+        @include img-100;
+       }
+    }
+
+
+    
+}
+

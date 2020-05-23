@@ -1,0 +1,26 @@
+/* color links */
+@mixin a-color-list($name, $color) {
+    #{$name} {
+        @include reset-a-all2($color,darken($color, 20%));
+    }
+}
+
+// color map to link
+@each $name, $color in $bg-colors {
+    @include a-color-list(".a-color#{$name}", $color);
+
+}
+
+@mixin a-color-list($name, $color) {
+    #{$name} {
+        a{
+            @include reset-a-all2($color,darken($color, 20%));
+        }
+       
+    }
+}
+
+@each $name, $color in $bg-colors {
+    @include a-color-list(".a-color-all#{$name}", $color);
+
+}

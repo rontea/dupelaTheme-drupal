@@ -1,0 +1,34 @@
+{
+  "name": "dupela",
+  "version": "1.0.0",
+  "description": "Dupela website design Theme",
+  "main": "index.js",
+  "dependencies": {
+    "fs-extra": "^9.0.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "autoprefixer": "^9.8.0",
+    "bootstrap": "^4.5.0",
+    "browser-sync": "^2.26.7",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-environments": "^1.0.0",
+    "gulp-html": "^3.0.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.5.1",
+    "panini": "^1.6.3",
+    "popper": "^1.0.1",
+    "rimraf": "^3.0.2",
+    "tether": "^1.4.7",
+    "theme_2_v1": "^1.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rontea",
+  "license": "ISC"
+}

@@ -1,0 +1,111 @@
+// build list
+@mixin news-col ($size, $color, $color-hover, $size-sub, $color-sub, $color-hover-sub) {
+
+    .news-body {
+        @include flex-row;
+
+    }
+
+    .news-data {
+        @include flex-col;
+
+        .title {
+            @include news-list-title ($size, $color, $color-hover);
+        }
+
+        .date-author {
+            @include news-list-date($size-sub, $color-sub, $color-hover-sub);
+        }
+    }
+
+}
+
+// recreate list 
+
+@mixin news-list-img-design($img-max-width: 100px,
+    $img-max-height: 100px) {
+
+    max-width: $img-max-width;
+    max-height: $img-max-height;
+    @include img-fit-cover;
+    @include img-responsive-100;
+
+}
+
+@mixin news-list-title ($size,
+    $color,
+    $color-hover) {
+
+    font-size: $size;
+    @include a-reset($color);
+    @include full-a-hover($color-hover);
+
+}
+
+@mixin news-list-date($size-sub,
+    $color-sub,
+    $color-hover-sub) {
+
+    font-size: $size-sub;
+    @include a-reset($color-sub);
+    @include full-a-hover($color-hover-sub);
+}
+
+
+
+
+// left
+.home-news-box {
+    padding: 2%;
+    img {
+
+        @include news-list-img-design(500px, 300px);
+
+        @include media-breakpoint-down(md) {
+            height: auto;
+            max-width: 100%;
+        }
+    }
+
+    .news-hightlight {
+        
+        .news-hightlight-title {
+
+            @include news-list-title(30px, $p-color-black, $p-color-1);
+
+        }
+        .news-hightlight-date-author{
+            font-size: $caption-font-size;
+        }
+        .news-hightlight-author {
+            @include news-list-date($caption-font-size, $p-color-1, $p-color-1)
+        }
+    }
+}
+
+// right
+.home-news-list {
+    .news-list {
+        img {
+            @include news-list-img-design(100px, 100px);
+
+            @include media-breakpoint-down(sm) {
+                 @include news-list-img-design(300px, 200px);
+
+            }
+        }
+    }
+
+    @include news-col ($title-1,
+        $p-color-black,
+        $p-color-1,
+        $caption-font-size,
+        $p-color-1,
+        $p-color-1);
+
+    .news-message {
+        text-align: center;
+        padding: 2vw;
+    }
+
+}

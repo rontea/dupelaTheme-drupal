@@ -1,0 +1,363 @@
+
+$min_width: 320px;
+$max_width: 1200px;
+
+$min-width-font : 320px;
+$max-width-font: 1200px;
+
+/* Text Manipulation */
+
+// fluid type
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+    @each $property in $properties {
+      #{$property}: $min-value;
+    }
+  
+    @media (min-width: $min-vw) {
+      @each $property in $properties {
+        #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+      }
+    }
+  
+    @media (min-width: $max-vw) {
+      @each $property in $properties {
+        #{$property}: $max-value;
+      }
+    }
+  }
+  // strip unit
+  @function strip-unit($number) {
+    @if type-of($number) == "number" and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+  
+    @return $number;
+  }
+// reset padding
+@mixin reset-padding {
+    padding: 0 !important;
+}
+
+// reset Margin
+@mixin reset-margin {
+    margin: auto !important;
+}
+
+// reset row and col on bootstrap
+@mixin reset-row-col {
+    .row {
+        @include reset-margin;
+    }
+
+    .col {
+        @include reset-padding;
+    }
+}
+
+// image to 100% on both
+@mixin img-100 {
+    width: 100%;
+    height: 100%;
+}
+
+@mixin img-responsive-100 {
+    width: 100%;
+    height: auto;
+}
+
+// reset .row
+@mixin reset-row {
+    margin: auto !important;
+}
+
+// seperator 
+
+@mixin seperator {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+// set the background colors
+@mixin bg-list($name, $color) {
+    #{$name} {
+        background-color: $color !important;
+    }
+}
+
+// create it to produce .color-1 and ....
+@each $name,
+$color in $bg-colors {
+    @include bg-list(".color#{$name}", $color);
+}
+
+/* Text Color */
+@mixin text-list($name, $color) {
+    #{$name} {
+        color: $color !important;
+    }
+}
+
+// btn for dupela
+// btn https://github.com/twbs/bootstrap/blob/master/scss/_buttons.scss
+// @mixin button-variant https://github.com/twbs/bootstrap/blob/master/scss/mixins/_buttons.scss
+
+/* text color class text-color-1 and...*/
+
+@each $name,
+$color in $bg-colors {
+    @include text-list(".text-color#{$name}", $color);
+}
+
+/* responsive */
+
+/* text manipulation */
+
+// anchor 
+// color
+@mixin a-color($color) {
+    color: $color;
+}
+
+// hover
+@mixin a-hover($color) {
+    &:hover {
+        @include a-color($color);
+    }
+}
+
+// decoration
+@mixin a-decoration {
+    text-decoration: none;
+}
+
+@mixin a-decoration-mobile($color) {
+    text-decoration: underline;
+    text-decoration-color: $color;
+}
+
+// visited
+@mixin a-visited($color) {
+    &:visited {
+        @include a-color($color);
+    }
+}
+
+// reset 
+@mixin a-reset($color) {
+    a {
+        @include a-decoration();
+        @include a-color($color);
+    }
+}
+
+@mixin a-reset-mobile($color) {
+    @include a-decoration-mobile($color);
+}
+
+// set hover
+@mixin full-a-hover($color) {
+    a {
+        @include a-hover($color);
+    }
+}
+
+// reset link
+@mixin reset-a-all ($color, $color-second) {
+
+    @include a-decoration();
+    @include a-color($color);
+
+    &:visited {
+        @include a-color($color);
+    }
+
+    &:hover {
+        @include a-color($color-second);
+    }
+}
+
+// reset link
+@mixin reset-a-all2 ($color, $color-second) {
+
+    
+    @include a-decoration();
+    
+    
+    @include a-color($color);
+
+    &:visited {
+        @include a-color($color);
+    }
+
+    &:hover {
+        @include a-color($color-second);
+        text-decoration: none;
+    }
+}
+
+@mixin a-hover-decoration-none {
+    a {
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+}
+/* image */
+
+@mixin img-fit-cover {
+    object-fit: cover;
+}
+
+/* flex */
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-grow {
+    display: flex;
+    align-items: stretch;
+
+    .grow-1 {
+        @include col-1();
+    }
+
+    .grow-2 {
+        @include col-2();
+    }
+
+    .grow-3 {
+        @include col-3();
+    }
+
+    .grow-4 {
+        @include col-4();
+    }
+
+    .grow-5 {
+        @include col-5();
+    }
+
+    .grow-6 {
+        @include col-6();
+    }
+
+    .grow-7 {
+        @include col-7();
+    }
+
+    .grow-8 {
+        @include col-8();
+    }
+
+    .grow-9 {
+        @include col-9();
+    }
+
+    .grow-10 {
+        @include col-10();
+    }
+
+    .grow-11 {
+        @include col-11();
+    }
+
+    .grow-12 {
+        @include col-12();
+    }
+}
+
+@mixin col-1 {
+    flex-grow: 1
+}
+
+@mixin col-2 {
+    flex-grow: 2
+}
+
+@mixin col-3 {
+    flex-grow: 3
+}
+
+@mixin col-4 {
+    flex-grow: 4
+}
+
+@mixin col-5 {
+    flex-grow: 5
+}
+
+@mixin col-6 {
+    flex-grow: 6
+}
+
+@mixin col-7 {
+    flex-grow: 7
+}
+
+@mixin col-8 {
+    flex-grow: 8
+}
+
+@mixin col-9 {
+    flex-grow: 9
+}
+
+@mixin col-10 {
+    flex-grow: 10
+}
+
+@mixin col-11 {
+    flex-grow: 11
+}
+
+@mixin col-12 {
+    flex-grow: 12
+}
+
+
+
+/*
+    Category:
+    Solid - fas
+    Regular - 
+    Light -
+    Duotone - 
+    Brands -
+
+    Reference fa-var: C:\xampp\htdocs\Theme Development\VueTest\prjDupela\design\node_modules\@fortawesome\fontawesome-free\scss
+    variables.scss
+
+    location: before or after
+
+    Location
+    $fas : '.fas';
+    $location-after: 'after';
+    $location-before: 'before';
+
+    variable icon:
+    $fa-item-minus: $fa-var-minus;
+    $fa-item-plus : $fa-var-plus;
+
+    usage:
+    @include accordion-symbol($fas, $fa-item-plus, $location-before);
+*/
+
+// Mixin Icon
+
+@mixin accordion-symbol($category, $fa-var, $location) {
+    @extend %fa-icon;
+    @extend #{$category};
+
+    &:#{$location} {
+        content: fa-content(#{$fa-var});
+    }
+}
+

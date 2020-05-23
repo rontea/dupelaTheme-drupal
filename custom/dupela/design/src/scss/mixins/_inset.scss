@@ -1,0 +1,63 @@
+
+/* inset */
+@mixin set-padding-top($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding-top:$value;
+    }
+  }
+  
+  @mixin set-padding-bottom($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding-bottom:$value;
+    }
+  }
+  
+  @mixin set-padding-left($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding-left:$value;
+    }
+  }
+  
+  @mixin set-padding-right($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding-right:$value;
+    }
+  }
+  
+  @mixin set-padding-x($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding-left:$value;
+      padding-right:$value;
+    }
+  }
+  
+  @mixin set-padding-y($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding-top:$value;
+      padding-bottom:$value;
+    }
+  }
+  
+  @mixin set-padding($name,$i){
+    #{$name} {
+      $value : $i * 1%;
+      padding:$value;
+    }
+  }
+  
+  @for $i from 1 through 5 {
+  
+    @include set-padding-top(".inset-top-#{$i}",$i);
+    @include set-padding-bottom(".inset-bottom-#{$i}",$i);
+    @include set-padding-left(".inset-left-#{$i}",$i);
+    @include set-padding-right(".inset-right-#{$i}",$i);
+    @include set-padding-x(".inset-x-#{$i}",$i);
+    @include set-padding-y(".inset-y-#{$i}",$i);
+    @include set-padding(".inset-#{$i}",$i);
+  }

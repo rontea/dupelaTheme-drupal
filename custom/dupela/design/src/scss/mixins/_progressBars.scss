@@ -1,0 +1,282 @@
+
+/*
+    Counter
+*/
+
+.dupela-counter-wrap {
+    text-align: center;
+    background-color: $p-color-lighten;
+    color: $p-color-white;
+    border-radius: 1%;
+
+    .count-container {
+        border-right: $p-color-white solid 1px;
+
+        &:last-of-type {
+            border-right: none;
+        }
+
+        @include media-breakpoint-down(md) {
+            border-right: none;
+            margin-bottom: 2vw;
+            margin-top: 2vw;
+
+            &:nth-of-type(odd) {
+                border-right: $p-color-white solid 1px;
+            }
+
+        }
+    }
+}
+
+// Percentage circle
+
+// mixin
+
+$max-fills : 100;
+$fill-duration: 3s;
+
+// fill 1-10 can be modified to 100
+@mixin circle-transform() {
+
+    @for $i from 1 through $max-fills {
+
+        $cur: $i;
+        $deg: 180deg * ($cur / 100);
+        
+        &.fill-#{$i} {
+
+            transform: rotate($deg);
+            animation: fill-animate-#{$i} ease-in-out $fill-duration;
+        }
+    }
+}
+// animate
+@mixin fill-animate {
+
+    @for $i from 1 through $max-fills {
+        $cur: $i;
+        //$cur: $i * 10;
+        $deg: 180deg * ($cur / 100);
+
+        @keyframes fill-animate-#{$i} {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+
+                transform: rotate($deg);
+            }
+        }
+
+    }
+
+}
+
+$max-fill-x: 100;
+@mixin line-transform() {
+
+    @for $i from 1 through $max-fill-x {
+
+        $cur: $i;
+        $width: 1% * $cur;
+
+        .fill-x#{$i} {
+
+            width: $width;
+            animation: fill-animate-x#{$i} ease-in-out $fill-duration;
+        }
+    }
+}
+
+@mixin fill-animate-x {
+
+    @for $i from 1 through $max-fill-x {
+
+        $cur: $i;
+        $width:  1% * $cur;
+
+        @keyframes fill-animate-x#{$i} {
+            0% {
+                width:0;
+            }
+
+            100% {
+
+                width: $width;
+            }
+        }
+
+    }
+
+}
+/* Progress bar */
+/* Progress Bars */
+
+$progress-bg-color: #ddd;
+$progress-padding-t: 10px;
+$progress-padding-b: 10px;
+
+$progress-type-color: black;
+
+
+
+// wrap progress bar
+$bar-width: auto;
+$bar-max-width: auto;
+$heigth: 20px;
+
+$bar-max-height: auto;
+$bar-height: auto;
+
+
+
+$bar-x : 1.5vw;
+$bar-y: 1.5vw;
+
+$border-radius-left: 15px 0 0 15px;
+$border-radius-right: 0 15px 0 15px;
+
+.progress-bar-wrap {
+
+    
+    @include line-transform();
+    
+  
+    width: $bar-width;
+    max-width: $bar-max-width;
+    height: $bar-height;
+    max-height: $bar-max-height;
+    margin-left: $bar-x;
+    margin-right: $bar-y;
+    
+
+    
+
+    &.bar-border {
+        border: solid 1px $p-color-light;
+        border-radius: 10px;
+    }
+
+
+    .label {
+        margin-bottom: .44vw;
+    }
+
+    .progress {
+        margin-bottom: 1.8vw;
+        
+        .label {
+            margin-right: 1vw;
+        }
+
+        &:last-of-type,
+        &:first-of-type {
+            margin-bottom: 1.2vw !important;
+        }
+    }
+
+    &.progress-bar-dupela {
+        background-color: $progress-bg-color;
+    
+        .container-bar {
+            width: 100%;
+            display: flex;
+
+            .label {
+                margin-right: 1vw;
+            }
+
+        }
+    
+        .progress-bar-type {
+            text-align: right;
+            color: $progress-type-color;
+            height: $heigth;
+            border-radius: $border-radius-left;
+        }
+        
+    }
+}
+
+
+/* Circle Variables */
+
+// change size accoding to need
+$circle-wrap-width: 100px;
+$circle-wrap-height: 100px;
+// background color
+$circle-wrap-bg : #e6e2e7;
+// should be 50 always
+$border-radius-circle: 50%;
+// center computation for size change adjusent 
+$circle-center : $circle-wrap-width / 2;
+
+
+/* inside circle */
+$inside-circle-width : $circle-wrap-width - 20px;
+$inside-circle-height : $circle-wrap-height - 20px;
+// font size
+$inside-circle-font-size : 1.5em;
+
+// circle 
+.circle-wrap {
+    margin: auto;
+    width: $circle-wrap-width;
+    height: $circle-wrap-height;
+    background: $circle-wrap-bg;
+    border-radius: $border-radius-circle;
+
+    .circle {
+        margin-bottom: 2vw;
+
+        .mask,
+        .fill {
+            width: $circle-wrap-width;
+            height: $circle-wrap-height;
+            position: absolute;
+            border-radius: $border-radius-circle;
+        }
+
+        .mask {
+            // Erasee direction top V , right <  , bottom ^ , left >
+            clip: rect(0px, $circle-wrap-width, $circle-wrap-width, $circle-center);
+
+            .fill {
+                clip: rect(0px, $circle-center, $circle-wrap-width, 0px);
+                background-color: #9e00b1;
+            }
+
+            &.full {
+
+                @include circle-transform();
+            }
+        }
+
+        .fill {
+
+            @include circle-transform();
+
+        }
+
+    }
+
+    .inside-circle {
+        width: $inside-circle-width;
+        height: $inside-circle-height;
+        border-radius: 50%;
+        background: #fff;
+        line-height: $inside-circle-width;
+        text-align: center;
+        margin-top: 10px;
+        margin-left: 10px;
+        position: absolute;
+        z-index: 100;
+        font-weight: 700;
+        font-size: $inside-circle-font-size;
+    }
+}
+
+@include fill-animate();
+@include fill-animate-x();

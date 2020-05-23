@@ -1,0 +1,240 @@
+/* Need Bootstrap and Dupela Mixins to Function*/
+
+// max width
+$max-width: 1280px;
+
+// max height 
+$max-height: 634px;
+
+//width
+$width: 1280px;
+
+// height
+$heigth: 634px;
+
+// equal width
+$width-whole: $width / 2;
+$width-half: $width-whole / 2;
+
+// equal height
+$heigth-whole: $heigth;
+$heigth-half: $heigth / 2;
+
+
+// minimum height 
+$min-height: 212px;
+
+/*Design*/
+
+/*Variable Text Header */
+
+// font and text color
+$s-tile-title-text-font: inherit;
+$s-tile-title-text-color: rgb(241, 220, 220) !default;
+$s-tile-title-text-a-hcolor: darken($s-tile-title-text-color, 20%) !default;
+
+/* Smart Tile Date color */
+$s-tile-date-text-color: $s-tile-title-text-color !default;
+
+/* Smart Tile button color */
+$s-title-button-color: white !default;
+$s-title-button-hover-color: darken($s-title-button-color, 20%);
+
+$s-title-button-bg-color: yellow !default;
+$s-title-button-bg-hcolor: lighten($s-title-button-bg-color, 20%) !default;
+
+/* underline indicator for mobile */
+$color-underline : red !default;
+
+/* SMART TILE */
+
+@mixin smart-tiles() {
+  // make sure that it is relative
+  position: relative;
+
+
+  /* Image - has an issue on IE and Edge (not supported) */
+  img {
+    object-fit: cover;
+    @include img-100;
+  }
+
+  /* Reset Bootsrap define*/
+  .row {
+    @include reset-row();
+
+  }
+
+  /* left image large */
+  .left-item-image {
+    @include left-image();
+  }
+
+  /* right image split */
+  .right-item-image {
+    @include right-image();
+  }
+
+  // Title and buttons
+  .title-bottom {
+    @include smart-tile-design();
+  }
+
+  button.cat-button {
+    @include smart-tile-button();
+  }
+}
+
+/* Breakpoints Bootstrap define */
+
+// media on left item large up
+@mixin lg-media-left {
+  @include media-breakpoint-up(lg) {
+    width: $width-whole;
+   // @include title-text-1;
+  }
+}
+
+// media right top large up
+@mixin lg-media-right-top {
+  @include media-breakpoint-up(lg) {
+    height: $heigth-half;
+    width: $width-whole;
+    //@include title-text-3;
+  }
+}
+
+// media right bottom split large up
+@mixin lg-media-right-bottom {
+  @include media-breakpoint-up(lg) {
+    height: $heigth-half;
+    width: $width-half;
+    //@include title-text-4;
+  }
+}
+
+// media on medium down 
+@mixin md-media {
+  @include media-breakpoint-down(md) {
+    height: $min-height;
+    width: $width;
+    //@include title-text-4;
+  }
+}
+
+
+/* Left image*/
+@mixin left-image {
+  width: $width-half;
+  height: $heigth-whole;
+
+  @include reset-padding();
+
+  img {
+    @include img-100();
+  }
+
+  // breakpoints
+  @include lg-media-left();
+  @include md-media();
+}
+
+/* right image */
+@mixin right-image {
+
+  @include reset-padding();
+
+  img {
+    @include img-100();
+  }
+
+  .top {
+    height: $heigth-half;
+    width: $width-whole;
+
+    @include reset-padding();
+
+    // break points
+    @include lg-media-right-top();
+    @include md-media();
+
+  }
+
+  .bottom {
+    height: $heigth-half;
+    width: $width-half;
+
+    @include reset-padding();
+    @include lg-media-right-bottom();
+    @include md-media();
+
+  }
+
+}
+
+// title design Variable 
+
+/* Design */
+@mixin smart-tile-design {
+
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  right: auto;
+  top: auto;
+  opacity: 1;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  padding: 1%;
+
+
+  // design header
+  .text-header-design {
+
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    font-family: $s-tile-title-text-font;
+    text-align: left;
+    color: $s-tile-title-text-color;
+    line-height: 1.6;
+    @include a-reset($s-tile-title-text-color);
+    @include full-a-hover($s-tile-title-text-a-hcolor);
+
+  }
+
+  // date design
+  .date-news-gallery {
+    font-size: $caption-font-size;
+    text-align: left;
+    text-transform: uppercase;
+    color: $s-tile-date-text-color;
+
+  }
+
+}
+
+// button design
+@mixin smart-tile-button {
+
+  border: none;
+  position: absolute;
+  display: inline-block;
+  color: $s-title-button-color;
+  background-color: $s-title-button-bg-color;
+  cursor: pointer;
+  left: 10%;
+  top: 10%;
+  font-size: $caption-font-size;
+  text-transform: uppercase;
+  padding: 6px;
+  font-weight: bold;
+  text-align: center;
+  @include a-reset($s-tile-title-text-color);
+
+  &:hover {
+    background-color: $s-title-button-bg-hcolor;
+    color: $s-title-button-hover-color;
+  }
+
+}

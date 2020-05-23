@@ -1,0 +1,326 @@
+@charset "utf-8";
+/* CSS Document - Branch update 2*/
+
+/* Import List */
+
+/** Variable update
+*/
+
+// font
+
+$font-family-dupela : "Arial Rounded MT Bold",
+"Helvetica Rounded",
+Arial,
+sans-serif;
+
+/* pallete colors */
+
+$p-color-1 : #FF0000;
+$p-color-2 : #f7e5e5;
+$p-color-3 : #797980;
+$p-color-4 : #eeeeee;
+$p-color-5 : #000000;
+
+// light and dark 
+$p-color-light : #d0d0d0;
+$p-color-dark : #020202;
+
+$p-color-white : white;
+$p-color-black : black;
+
+$p-color-lighten: lighten($p-color-black, 20%);
+$p-color-darken: darken($p-color-black, 20%);
+
+$text-color-primary : #000000;
+$text-color-secondary: #FFFFFF;
+
+$text-color-p-sub: #797980;
+$text-color-s-sub: #eeeeee;
+
+/* Bootstrap */
+$body-bg: $p-color-4;
+
+// primary and secondary
+
+$primary: $p-color-1;
+$secondary: $p-color-white;
+
+// links 
+
+
+// navbar light color 
+$navbar-light-color: black !important;
+$navbar-light-hover-color: black !important;
+$navbar-light-active-color: $p-color-1 !important;
+
+// brand
+$navbar-light-brand-color: $p-color-5;
+$navbar-light-brand-hover-color: $p-color-5;
+//drop down
+
+$dropdown-bg: $p-color-4;
+
+$dropdown-box-shadow: none;
+
+$dropdown-link-color: black;
+$dropdown-link-hover-color: darken($p-color-1, 10%);
+$dropdown-link-hover-bg: lighten($p-color-4, 5%);
+
+$dropdown-link-active-color: $p-color-1;
+$dropdown-link-active-bg: lighten($p-color-4, 5%);
+
+
+$dropdown-item-padding-y: 2px;
+$dropdown-item-padding-x: 5px;
+
+// btn
+
+$btn-link-color: $p-color-white;
+$btn-link-hover-color: $p-color-white;
+// @import "google/google_font";
+@import "bootstrap/bootstrap";
+
+/* Background list of color */
+
+$bg-colors: (
+  "-1": $p-color-1,
+  "-2": $p-color-2,
+  "-3": $p-color-3,
+  "-4": $p-color-4,
+  "-5": $p-color-5,
+  "-black": $p-color-black,
+  "-white": $p-color-white,
+  "-lighten": $p-color-lighten,
+  "-darken": $p-color-darken,
+  "-light": $p-color-light,
+  "-dark": $p-color-dark,
+  "-primary":    $primary,
+  "-secondary":  $secondary,
+  "-success":    $success,
+  "-info":       $info,
+  "-warning":    $warning,
+  "-danger":     $danger,
+  "-bot-light":      $light,
+  "-bot-dark":       $dark
+  );
+
+  $normal-font-size: 1rem;
+
+/* Big Font*/
+$bg-font-1 : 64px;
+$bg-font-2 : 56px;
+$bg-font-3 : 48px;
+$bg-font-4 : 40px;
+$bg-font-5 : 32px;
+$bg-font-6 : 24px;
+
+// Main font size
+$bg-font-size: ("1": $bg-font-1,
+  "2": $bg-font-2,
+  "3": $bg-font-3,
+  "4": $bg-font-4,
+  "5": $bg-font-5,
+  "6": $bg-font-6,
+);
+/*Title*/
+$title-1 : $normal-font-size + 0.125rem;// 16px + 2px;
+
+/* Title 2*/
+$title-2 : $normal-font-size + .25rem; // 20px
+
+/*Sub Title */
+
+$sub-title-1 : $normal-font-size; // 16px
+$sub-title-2 : 0.875rem; //14px
+
+/* Caption */
+$caption-font-size: 0.75rem; //12px
+
+/* Overline */
+
+
+/* Smart Tiles */
+$s-tile-title-text-color: #FFFFFF;
+$s-title-button-bg-color: $p-color-1;
+$s-tile-title-text-a-hcolor: $p-color-1;
+
+/* News Tabs */
+$news-tab-title-color-a-hover: $p-color-1;
+$news-tab-title-color-sub: $p-color-1;
+
+/*
+  Content Area
+*/
+
+$content-area: 1500px; 
+
+// @import "bulma/bulma";
+@import "fontawesome/fontawesome";
+// global mixin dupela
+@import "mixins";
+
+//News Tab
+@import "newsTabs";
+
+// Smart Tiles
+@import "smartTiles";
+
+//News List
+@import "newsList";
+
+// mixins
+@import "mixins/dupela_inc";
+
+
+/* Global CSS V 0.0.1 */
+/*
+Theme Name: Dupela
+Theme URI: http://www.dupela.com
+Author: Ronryan Teano
+Author URI: http://www.dupela.com
+Description: Dupela Theme 2019
+Version: 0.0
+License:
+License URI: 
+Text Domain: Dupela
+*/
+
+/*
+HEADER
+*/
+
+$max-width: 1500px;
+$lighten-black : $p-color-lighten;
+
+body {
+  overflow-x: auto;
+}
+
+div .mobile-link-guide {
+  font-size: 1.4em !important;
+  color: $p-color-1;
+
+}
+
+.seperator {
+  @include seperator();
+}
+
+/*
+  CONTENT AREA
+*/
+
+.back-effect {
+  position: absolute;
+  background-color: $lighten-black;
+  min-height: 700px;
+  height: 60%;
+  width: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.about-wrap {
+  background-color: $lighten-black;
+  color: $p-color-white;
+}
+
+
+
+.content-area {
+  max-width: $content-area;
+
+  .pallete-page {
+    padding: 1%;
+
+    .col {
+      height: 100px;
+    }
+  }
+
+  .pallete-text {
+    padding: 1%;
+
+    .col {
+      padding: 1%;
+    }
+  }
+
+
+  /* Top Images */
+
+
+  .home-about {
+
+    img {
+      max-height: 500px;
+      max-width: 700px;
+      @include img-100;
+    }
+
+  }
+
+  // news section 
+}
+
+.demo-carousel {
+  @include news-tabs;
+}
+
+.glo-article-heading {
+  border-bottom: solid $p-color-black 1px;
+
+  .article-title {
+    margin-top: 3px;
+    margin-bottom: 3px;
+
+    span {
+      background-color: $p-color-1;
+      color: $p-color-white;
+      padding: 5px;
+    }
+  }
+
+}
+
+/*
+CONTENT 
+*/
+// home 4 items images
+
+
+  .home-latest {
+
+    @include news-tabs;
+
+  }
+
+
+
+
+/*Smart Tiles */
+
+.smart-tiles {
+  @include smart-tiles();
+}
+
+figure {
+  width: 70%;
+  margin: auto;
+}
+
+//header below stick css
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  width: 100%;
+
+  .navbar-brand {
+
+    display: block !important;
+
+  }
+
+}

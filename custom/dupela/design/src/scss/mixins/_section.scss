@@ -1,0 +1,24 @@
+/*
+    xs , sm , md, lg , xl
+
+        &.section-sm {
+
+        @include media-breakpoint-down(sm) {
+            padding: 60px 0;
+        }
+        
+    }
+
+*/
+
+$size-list: ("xs" : 60px,
+    "xl" : 50px,
+    "lg" : 40px,
+    "md" : 30px,
+    "sm" : 20px);
+
+.section {
+    padding: 20px;
+
+    @include fluid-type(padding, $min-width-font, $max-width-font,7px , 20px);
+}

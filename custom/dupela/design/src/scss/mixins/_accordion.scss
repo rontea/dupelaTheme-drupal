@@ -1,0 +1,208 @@
+/*Accordion section*/
+
+$background : transparent;
+$border: $p-color-1;
+$color: $p-color-1;
+$hover-background: $p-color-1;
+$hover-border: $p-color-white;
+
+// width
+$accordion-horizontal-max-width : 700px;
+$accordion-horizontal-content-max-width: 500px;
+
+// Vertical tab
+.vertical {
+    .accordion-tab-menu {
+        a {
+            margin-top: 5px;
+        }
+
+        @include media-breakpoint-down(md) {
+            margin-right: 10px;
+            margin-left: 5px;
+        }
+
+       
+    }
+
+    .accordion-content-tab {
+        padding-left: 0 !important;
+    }
+}
+
+.tab-menu-horizontal {
+    .btn {
+        margin-right: 4px;
+
+        @include media-breakpoint-down(md) {
+            margin-bottom: 4px;
+        }
+    }
+}
+
+.vertical,
+.tab-menu-horizontal {
+    .btn-lg {
+        @include media-breakpoint-down(sm) {
+            padding: 2px 2px;
+            font-size: 15px;
+        }
+    }
+}
+
+
+.tab-content-vertical {
+    margin-left: 20px;
+
+    .panel-content {
+        padding: 5px;
+    }
+}
+
+// accordion for tabs
+.accordion-wrap {
+
+    height: auto;
+    max-width: $accordion-horizontal-max-width;
+
+    // content style
+    .accordion-content-tab {
+
+        padding: 5px;
+
+        .active-content {
+            // fade effect
+            display: block;
+            // envoke the fadeIn
+            animation: fadeIn 1.3s;
+        }
+
+        .hidden-content {
+            display: none;
+            // envoke the fadeOut 
+            animation: fadeOut 1.3s;
+        }
+
+        // fade effect of the accordion content
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+    }
+}
+
+// accordion 
+.accordion {
+    color: $p-color-black;
+
+    div[data-toggle="collapse"] {
+        cursor: pointer;
+    }
+
+    a {
+        color: $p-color-black !important;
+    }
+}
+
+// bootstrap collapse additional icon
+
+$fas : '.fas';
+$location-after: 'after';
+$location-before: 'before';
+
+// variable of icon
+$fa-item-minus: $fa-var-minus;
+$fa-item-plus : $fa-var-plus;
+
+/* CSS no JS */
+
+// the first content is not shown other will close once other is opened 
+// reference div
+.accordion-single {
+    .card-header.collapsed {
+        @include accordion-symbol($fas, $fa-item-plus, $location-before);
+
+        &:before {
+            margin-right: 5px;
+        }
+    }
+
+    .card-header {
+        @include accordion-symbol($fas, $fa-item-minus, $location-before);
+
+        &:before {
+            margin-right: 5px;
+        }
+    }
+}
+
+// style
+
+.card-body {
+    a {
+        color: $p-color-1 !important;
+    }
+}
+
+
+// the content is not shown but will open multiple content
+// reference a
+.accordion-multiple {
+    .card-header {
+        a {
+            @include accordion-symbol($fas, $fa-item-minus, $location-before);
+
+            &:before {
+                margin-right: 5px;
+            }
+        }
+
+    }
+
+    // when collapsed add  plus symbol
+    .card-header {
+        a.collapsed {
+            @include accordion-symbol($fas, $fa-item-plus, $location-before);
+
+            &:before {
+                margin-right: 5px;
+            }
+        }
+
+    }
+}
+
+/* With JS*/
+
+// add class symbol
+.accordion-symbol-minus {
+    @include accordion-symbol($fas, $fa-item-minus, $location-before);
+
+    &:before {
+        margin-right: 5px;
+    }
+}
+
+.accordion-symbol-plus {
+    @include accordion-symbol($fas, $fa-item-plus, $location-before);
+
+    &:before {
+        margin-right: 5px;
+    }
+}

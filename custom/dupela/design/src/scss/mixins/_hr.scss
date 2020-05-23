@@ -1,0 +1,28 @@
+/* hr */
+hr {
+    &.short {
+        height: 2px;
+        width: 70px;
+        display: inline-block;
+    }
+    &.hr-100 {
+        width: 100%;
+        height: 1px;
+        display: inline-block;
+    }
+    &.hr-50 {
+        width: 100%;
+        height: 1px;
+        display: inline-block;
+    }
+}
+
+.content-title {
+    h5+hr {
+        margin-top: 4px;
+    }
+}
+hr+p{
+    margin-top: 16px;
+}
+
