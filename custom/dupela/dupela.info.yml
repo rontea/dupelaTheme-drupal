@@ -19,6 +19,7 @@ regions:
   features_fourth: 'Features fourth'
   highlighted: 'Highlighted'
   content: 'Main content'
+  preview_content: 'Peview content'
   sidebar_first: 'Sidebar first'
   sidebar_second: 'Sidebar second'
   tertiary_first: 'Tertiary first'

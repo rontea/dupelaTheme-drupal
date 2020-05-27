@@ -1,0 +1,19 @@
+<?php 
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+
+function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('views_view_grid--smart_tiles_view', $variables['view']->id());
+    $suggestions[] = sprintf('views_view_grid--featured_article', $variables['view']->id());
+}
+
+function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('views_view_fields--smart_tiles_view', $variables['view']->id());
+    $suggestions[] = sprintf('views_view_fields--featured_article', $variables['view']->id());
+}

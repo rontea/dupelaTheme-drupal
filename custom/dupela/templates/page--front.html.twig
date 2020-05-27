@@ -55,7 +55,35 @@
 {% include '@dupela/includes/header.html.twig' %}
 {# end Header #}
 
+{# Smart Tiles #}
+{% include '@dupela/includes/smart-tiles/smart_tiles.html.twig' %}
+{# end Smart Tiles #}
 
-{% if page.preview_content %}
-    {{ page.preview_content }}
-{% endif %}
+<div class="color-4">
+    <div class="content-area mx-auto">
+        <section class="section">
+            <div class="container-fluid">
+                <div class="home-news-wrap p-2">
+                    <div class="glo-article-heading">
+                        <div class="article-title"> <span>Articles</span> </div>
+                    </div>
+                    <div class="row no-gutters">
+                       
+                            {% if page.features_second %}
+                                {{ page.features_second }}
+                            {% endif %}
+                        
+                        
+                            {% if page.features_third %}
+                                {{ page.features_third }}
+                            {% endif %}
+                           <!-- <div class="read-more-news pb-4 pt-2">
+                                <a href="#" class="btn btn-primary float-right"> Read More News </a>
+                            </div> -->
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
