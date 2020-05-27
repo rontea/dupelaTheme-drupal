@@ -52,7 +52,7 @@
 #}
 <div class="back-effect"></div>
 {# Header #}
-{% include '@dupela/includes/header.html.twig' %}
+{% include '@dupela/includes/header/header.html.twig' %}
 {# end Header #}
 
 {# Smart Tiles #}
@@ -68,19 +68,21 @@
                         <div class="article-title"> <span>Articles</span> </div>
                     </div>
                     <div class="row no-gutters">
-                       
+                            <div class="col-lg-6 justify-content-center d-flex">
                             {% if page.features_second %}
                                 {{ page.features_second }}
                             {% endif %}
-                        
-                        
+                            </div>
+                            <div class="col-md home-news-list">
                             {% if page.features_third %}
                                 {{ page.features_third }}
                             {% endif %}
-                           <!-- <div class="read-more-news pb-4 pt-2">
-                                <a href="#" class="btn btn-primary float-right"> Read More News </a>
-                            </div> -->
-                        
+
+                                <div class="col-12 read-more-news pb-4 pt-2 pr-2">
+                                    <a href="#" class="btn btn-primary float-right"> Read More</a>
+                                </div>
+                            </div>
+                           
                     </div>
                 </div>
             </div>
