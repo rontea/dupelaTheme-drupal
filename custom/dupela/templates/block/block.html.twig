@@ -27,16 +27,15 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
+<div class="content-area mx-auto">
+<section class="section">
   {{ title_prefix }}
   {% if label %}
     <h2{{ title_attributes }}>{{ label }}</h2>
   {% endif %}
   {{ title_suffix }}
   {% block content %}
-  <div class="home-news-list">
     {{ content }}
-  </div>
   {% endblock %}
+</section>
 </div>
-

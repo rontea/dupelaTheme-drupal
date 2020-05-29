@@ -90,7 +90,7 @@
             @include news-list-img-design(100px, 100px);
 
             @include media-breakpoint-down(sm) {
-                 @include news-list-img-design(300px, 200px);
+                 @include news-list-img-design(100px, 100px);
 
             }
         }
@@ -102,10 +102,23 @@
         $caption-font-size,
         $p-color-1,
         $p-color-1);
+    .no-news-image {
+        width: 100px;
+        margin-right: 1em;
 
+        img {
+            @include news-list-img-design(100px, 100px);
+
+            @include media-breakpoint-down(sm) {
+                 @include news-list-img-design(100px, 100px);
+
+            }
+        }
+    }
     .news-message {
         text-align: center;
         padding: 2vw;
     }
+    
 
 }

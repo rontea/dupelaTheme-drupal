@@ -68,24 +68,34 @@
                         <div class="article-title"> <span>Articles</span> </div>
                     </div>
                     <div class="row no-gutters">
-                            <div class="col-lg-6 justify-content-center d-flex">
-                            {% if page.features_second %}
-                                {{ page.features_second }}
-                            {% endif %}
-                            </div>
-                            <div class="col-md home-news-list">
-                            {% if page.features_third %}
-                                {{ page.features_third }}
-                            {% endif %}
 
-                                <div class="col-12 read-more-news pb-4 pt-2 pr-2">
-                                    <a href="#" class="btn btn-primary float-right"> Read More</a>
-                                </div>
+                            <div class="col-lg-6 justify-content-center d-flex">
+                                {% if page.features_second %}
+                                    {{ page.features_second }}
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-auto col-lg-6 home-news-list">
+                                {% if page.features_third %}
+                                    {{ page.features_third }}
+                                {% endif %}
                             </div>
                            
                     </div>
                 </div>
-            </div>
+                <section class="section">
+                    <div class="container-fluid">
+                        {% if page.features_fourth %}
+                            
+                            <div class="glo-article-heading">
+                                <div class="article-title"> <span>Latest</span> </div>
+                            </div>
+                            <div class="inset-2">
+                                {{ page.features_fourth }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>    
         </section>
     </div>
 </div>
