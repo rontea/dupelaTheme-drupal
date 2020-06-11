@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if content %}
+    <div class="row">
+          {{ content }}
+        <div class="col-6 col-sm-6  float-left">
+            <div class="footer-copyright mt-4 mb-4 caption text-color-light">© 2020 All Rights Reserved</div>
+        </div>
+
+        <div class="col-6 col-sm-6 footer-minimal">
+            <div class="footer-social a-light float-right mb-4 mt-4 text-5">
+                <a href="https://www.facebook.com/"><span class="fab fa-facebook"></span></a>
+                <a href="#" class=""><span class="fab fa-twitter "></span></a>
+                <a href="#" class=""><span class="fab fa-youtube "></span></a>
+                <a href="#" class=""><span class="fab fa-github "></span></a>
+                <a href="#" class=""><span class="fab fa-discord "></span></a>
+                <a href="#" class=""><span class="fas fa-user "></span></a>
+            </div>
+        </div>
+    </div>
+{% endif %}

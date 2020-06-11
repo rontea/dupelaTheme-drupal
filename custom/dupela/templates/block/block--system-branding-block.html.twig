@@ -1,38 +1,26 @@
+{% extends "block.html.twig" %}
 {#
 /**
  * @file
- * Default theme implementation to display a block.
+ * Default theme implementation for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
  *
  * Available variables:
- * - plugin_id: The ID of the block implementation.
- * - label: The configured label of the block if visible.
- * - configuration: A list of the block's configuration values.
- *   - label: The configured label for the block.
- *   - label_display: The display settings for the label.
- *   - provider: The module or other provider that provided this block plugin.
- *   - Block plugin specific settings will also be stored here.
- * - content: The content of this block.
- * - attributes: array of HTML attributes populated by modules, intended to
- *   be added to the main container tag of this template.
- *   - id: A valid HTML ID and guaranteed unique.
- * - title_attributes: Same as attributes, except applied to the main title
- *   tag that appears in the template.
- * - title_prefix: Additional output populated by modules, intended to be
- *   displayed in front of the main title tag that appears in the template.
- * - title_suffix: Additional output populated by modules, intended to be
- *   displayed after the main title tag that appears in the template.
- *
- * @see template_preprocess_block()
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
  *
  * @ingroup themeable
  */
 #}
 
-  {{ title_prefix }}
-  {% if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+{% block content %}
+<div class="col-12 col-md-2">
+    <div class="footer-company-name pt-4 font-weight-bold text-color-light text-3"> {{ site_name }} </div>
+        <div class="footer-message caption">
+        {{ site_slogan }}
+    </div>
+</div>
+{% endblock %}

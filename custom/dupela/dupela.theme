@@ -3,15 +3,37 @@
 /**
  * Implements hook_theme_suggestions_HOOK().
  */
+// page
+function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('page__list_article');
+}
+//node
+function dupela_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('node__read_article');
+    $suggestions[] = sprintf('node__list_category_article');
+}
+function dupela_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('block__sitebranding_header');
+    $suggestions[] = sprintf('block__sitebranding_footer');
 
+}
+
+// view view grid
 function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:
     $suggestions[] = sprintf('views_view_grid--smart_tiles_view', $variables['view']->id());
     $suggestions[] = sprintf('views_view_grid--featured_article', $variables['view']->id());
     $suggestions[] = sprintf('views_view_grid--article-list-home', $variables['view']->id());
+    $suggestions[] = sprintf('views_view_grid--pager', $variables['view']->id());
 }
-
+// view view field
 function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:

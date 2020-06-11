@@ -12,9 +12,10 @@ $news-tab-title-color-a-hover-sub: lighten($news-tab-title-color-sub, 20%) !defa
   img {
     @include img-100;
     @include img-fit-cover;
+    height: 200px;
     
     @include media-breakpoint-down(sm) {
-      max-height: 180px;
+      max-height: 200px;
     }
    
   }

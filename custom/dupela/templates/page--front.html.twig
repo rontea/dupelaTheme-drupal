@@ -83,19 +83,71 @@
                            
                     </div>
                 </div>
-                <section class="section">
-                    <div class="container-fluid">
-                        {% if page.features_fourth %}
-                            
-                            <div class="glo-article-heading">
-                                <div class="article-title"> <span>Latest</span> </div>
-                            </div>
-                            <div class="inset-2">
-                                {{ page.features_fourth }}
-                            </div>
-                        {% endif %}
-                    </div>
-                </section>    
+                 
         </section>
     </div>
 </div>
+<div class="color-4">
+    <div class="content-area mx-auto">
+        <section class="section">
+            <div class="container-fluid">
+                {% if page.features_fourth %}
+                    
+                    <div class="inset-2">
+                        {{ page.features_fourth }}
+                    </div>
+                    
+                {% endif %}
+            </div>
+        </section>   
+    </div>
+</div>
+<div class="about-wrap">
+    <div class="content-area mx-auto">
+        <section class="section">
+            <div class="container-fluid">
+                {% if page.about %}
+                    {{ page.about }}
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- subcribers -->
+<div class="color-4">
+    <div class="content-area mx-auto">
+        {% if page.footer_first %}
+            {{ page.footer_first }}
+            <section class="section">
+                <div class="container text-center">
+                    <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="font-weight-bold inset-top-3 text-4">Subscribe to Our Newsletter</div>
+                        <p class="lead inset-bottom-3">Sign up for our newsletter to receive the latest news and web design tips from our team
+                        as well as special offers from our partners. 100% spam-free!</p>
+                
+                        <form>
+                            <div class="form-group row no-gutters">
+                    
+                            <div class="col-12 col-sm-8 col-md-9 p-2">
+                                <input type="email" class="form-control" id="emailAddress"
+                                placeholder="emailname@example.com">
+                            </div>
+                    
+                            <div class="col-12 col-sm-4 col-md-3 p-2">
+                                <button type="submit" class="form-control btn btn-outline-primary">Subscribe</button>
+                            </div>
+                    
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    </div>
+</div>
+{# footer #}
+    {% include '@dupela/includes/footer/footer.html.twig' %}
+{# end footer #}

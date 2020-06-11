@@ -1,12 +1,12 @@
 name: dupela
 type: theme
+base theme: false
 description: 'dupela theme.'
-core: 8.x
+core_version_requirement: ^8.8 || ^9
 libraries:
   - dupela/global-styling
   - dupela/global-scripts
 regions:
-  messages: 'Messages'
   header: 'Header'
   header_first: 'Header first'
   header_second: 'Header second'
@@ -17,6 +17,7 @@ regions:
   features_second: 'Features second'
   features_third: 'Features third'
   features_fourth: 'Features fourth'
+  about: 'About'
   highlighted: 'Highlighted'
   content: 'Main content'
   preview_content: 'Peview content'
@@ -26,6 +27,7 @@ regions:
   tertiary_second: 'Tertiary second'
   tertiary_third: 'Tertiary third'
   tertiary_fourth: 'Tertiary fourth'
+  footer_first: 'Footer first'
   footer: 'Footer'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
