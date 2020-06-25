@@ -64,12 +64,9 @@
         <section class="section">
             <div class="container-fluid">
                 <div class="home-news-wrap p-2">
-                    <div class="glo-article-heading">
-                        <div class="article-title"> <span>Articles</span> </div>
-                    </div>
                     <div class="row no-gutters">
 
-                            <div class="col-lg-6 justify-content-center d-flex">
+                            <div class="col-lg-6 justify-content-left d-flex">
                                 {% if page.features_second %}
                                     {{ page.features_second }}
                                 {% endif %}
@@ -77,7 +74,9 @@
                             
                             <div class="col-md-auto col-lg-6 home-news-list">
                                 {% if page.features_third %}
+                                    <div class="home-news-list">
                                     {{ page.features_third }}
+                                    </div>
                                 {% endif %}
                             </div>
                            
@@ -89,6 +88,8 @@
 </div>
 <div class="color-4">
     <div class="content-area mx-auto">
+      
+
         <section class="section">
             <div class="container-fluid">
                 {% if page.features_fourth %}
@@ -100,6 +101,8 @@
                 {% endif %}
             </div>
         </section>   
+
+        
     </div>
 </div>
 <div class="about-wrap">

@@ -3,13 +3,31 @@
 /**
  * Implements hook_theme_suggestions_HOOK().
  */
-// page
-function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+
+// view view grid
+function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('views_view_grid--dupela_smart_tiles', $variables['view']->id());
+}
+// view view field
+function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('views_view_fields--dupela_smart_tiles', $variables['view']->id());
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ 
+*/ 
+/* page
+function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+   // If you want you can add a template suggestion for all views
     // based on their ID:
     $suggestions[] = sprintf('page__list_article');
 }
-//node
+* node
 function dupela_theme_suggestions_node_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:
@@ -23,21 +41,25 @@ function dupela_theme_suggestions_block_alter(array &$suggestions, array $variab
     $suggestions[] = sprintf('block__sitebranding_footer');
 
 }
+*/
 
-// view view grid
-function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('views_view_grid--smart_tiles_view', $variables['view']->id());
-    $suggestions[] = sprintf('views_view_grid--featured_article', $variables['view']->id());
-    $suggestions[] = sprintf('views_view_grid--article-list-home', $variables['view']->id());
-    $suggestions[] = sprintf('views_view_grid--pager', $variables['view']->id());
+
+/**
+ *  @file
+ *  writing preprocess_node 
+ *  using views_embed_view('machine_name','block_title')
+ */
+
+/**
+ * & - is a reference 
+ */
+
+/*
+function dupela_preprocess_node(&$variables){
+   //$variables['author_name'] = "edited name!";
+    $variables['next_and_prev'] = views_embed_view('next_and_prev', 'block_1');
+    $variables['next'] = views_embed_view('next', 'block_2');
+    //dump($variables['next_and_prev']);
 }
-// view view field
-function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('views_view_fields--smart_tiles_view', $variables['view']->id());
-    $suggestions[] = sprintf('views_view_fields--featured_article', $variables['view']->id());
-    $suggestions[] = sprintf('views_view_fields--article_list_home', $variables['view']->id());
-}
+
+*/

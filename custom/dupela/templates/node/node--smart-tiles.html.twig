@@ -74,10 +74,19 @@
  */
 #}
 
-<div class="content-area container seperator color-lighten text-white mb-4">
-    {# breadcrumbs #}
+  {{ title_prefix }}
+    {% if label and not page %}
+        <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+    {% endif %}
+  {{ title_suffix }}
+{# Admin #}
+{% if is_admin %}
+     
+{% endif %}
 
-    
+<div class="content-area container seperator color-lighten text-white mb-4" {{ attribute}}>
     <div class="article-title-read  mt-2">
         <h2>{{ label }}</h2>
     </div>
@@ -105,34 +114,32 @@
             </div>
 
         </div>
-
     </div>
 
 </div>
 <div class="color-4 inset-top-2">
     <div class="content-area mx-auto ">
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md">
+
                     <div class="article-information-read p-2 d-flex flew-row">
                         <div class="article-prev mr-4">
-                            <a href="#" class="btn btn-primary"> Previous</a>
+                        {{ }}
                         </div>
                         <div class="article-label-read">
-                            Last Update : {{ node.changed.value|date('m/d/Y') }}
-
+                           Last Update : {{ node.changed.value|date('m/d/Y') }}
                         </div>
                         <div class="article-next ml-auto">
-                            <a href="#" class="btn btn-primary"> Next</a>
+                        {{ }}
                         </div>
-
                     </div>
+
                     <div class="google-ads-horizontal">
                         Image google adds
                         <!-- img src="./img/addgoogleh.png syk" alt="add google horizontal"> -->
                     </div>
-                    <div class="article">
+                    <div class="article" {{ content_attributes }}>
                         <article>
                             <div class="article-read-image pt-2 pb-2">
                             {{ content.field_image }}
@@ -163,12 +170,12 @@
     
 </div>
 
-{#
-{{ content.field_title}}
-{{ url }}
-{{ content.links }}
-{{ content.field_display }}
 
+{#
+    {{ content.field_title}}
+    {{ url }}
+    {{ content.links }}
+    {{ content.field_display }}
 #}
 
 

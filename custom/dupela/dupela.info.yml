@@ -8,6 +8,7 @@ libraries:
   - dupela/global-scripts
 regions:
   header: 'Header'
+  breadcrumb: 'Breadcrumb'
   header_first: 'Header first'
   header_second: 'Header second'
   header_search: 'Header search'
