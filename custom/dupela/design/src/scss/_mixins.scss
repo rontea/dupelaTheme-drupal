@@ -360,4 +360,39 @@ $color in $bg-colors {
         content: fa-content(#{$fa-var});
     }
 }
+/*
+    Category:
+    Solid - fas
+    Regular - 
+    Light -
+    Duotone - 
+    Brands -
 
+    Reference fa-var: C:\xampp\htdocs\Theme Development\VueTest\prjDupela\design\node_modules\@fortawesome\fontawesome-free\scss
+    variables.scss
+
+    location: before or after
+
+    Location
+    $fas : '.fas';
+    $location-after: 'after';
+    $location-before: 'before';
+
+    variable icon:
+    $fa-item-minus: $fa-var-minus;
+    $fa-item-plus : $fa-var-plus;
+
+    usage:
+    @include accordion-symbol($fas, $fa-item-plus, $location-before);
+*/
+
+// Mixin Icon
+
+@mixin add-icon-fontawesome($category, $fa-var, $location) {
+    @extend %fa-icon;
+    @extend #{$category};
+
+    &:#{$location} {
+        content: fa-content(#{$fa-var});
+    }
+}

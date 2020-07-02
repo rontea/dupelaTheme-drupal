@@ -12,4 +12,11 @@
  * @ingroup themeable
  */
 #}
-<input{{ attributes }} />{{ children }}
+
+{%
+    set classes = ['btn', 'col-2']
+%}
+
+ <button {{ attributes.addClass(classes) }}>
+    <i class="fas fa-search text-color-white"></i>
+</button>

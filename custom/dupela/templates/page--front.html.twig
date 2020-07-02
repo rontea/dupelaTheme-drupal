@@ -66,13 +66,13 @@
                 <div class="home-news-wrap p-2"> 
                     <div class="row no-gutters">
 
-                            <div class="col-lg-6 justify-content-left d-flex">
+                            <div class="col-12 col-lg-6 inset-left-2">
                                 {% if page.features_second %}
                                     {{ page.features_second }}
                                 {% endif %}
                             </div>
                             
-                            <div class="col-md-auto col-lg-6 home-news-list">
+                            <div class="col-12 col-lg-6 home-news-list">
                                 {% if page.features_third %}
                                     <div class="home-news-list">
                                     {{ page.features_third }}
@@ -88,21 +88,15 @@
 </div>
 <div class="color-4">
     <div class="content-area mx-auto">
-      
-
         <section class="section">
             <div class="container-fluid">
                 {% if page.features_fourth %}
-                    
                     <div class="inset-2">
                         {{ page.features_fourth }}
                     </div>
-                    
                 {% endif %}
             </div>
-        </section>   
-
-        
+        </section>       
     </div>
 </div>
 <div class="about-wrap">

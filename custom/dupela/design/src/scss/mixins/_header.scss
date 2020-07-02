@@ -46,25 +46,28 @@ header {
           background-color: $p-color-lighten;
           color: white;
           height: 30px;
-  
           width: 100%;
         }
-  
+     
+
         // button icon
-        button {
+        input[type=submit] {
           height: 30px;
-  
+          width: 30px;
+          
           &:focus {
             box-shadow: none;
           }
         }
-  
       }
   
       // social media links
+
       .dropdown {
+       
         .dropdown-menu {
-  
+         
+          position: absolute;
           a {
             margin-left: 5px;
             font-size: 15px;

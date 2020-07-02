@@ -2,6 +2,7 @@
 
 /**
  * Implements hook_theme_suggestions_HOOK().
+ * 
  */
 
 // view view grid
@@ -17,7 +18,131 @@ function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, ar
     $suggestions[] = sprintf('views_view_fields--dupela_smart_tiles', $variables['view']->id());
 }
 
+// form
+function dupela_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+   
+
+    if ( $variables['element']['#form_id'] === 'search_block_form') {
+        $suggestions[] = sprintf('form__search_block_form');
+        //dump($variables['element']);
+    }
+
+    
+   // dump($variables['element']);
+}
+
+// input 
+function dupela_theme_suggestions_input_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    
+    
+    if($variables['theme_hook_original'] == "input__search") {
+        $suggestions[] = sprintf('input__search__search_block_form');
+    }
+
+    //if($variables['theme_hook_original'] == "input__submit") {
+      //  $suggestions[] = sprintf('input__submit__search_results_submit');
+    //}
+    // getting the input submit to work
+    $element = $variables['element'];
+
+    if (isset($element['#attributes']['data-twig-suggestion'])) {
+        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+    }
+    //dump($variables);
+     
+}
+
+// all
+
+function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    //dump($hook);
+
+    if($hook == 'form') {
+        
+    }
+}
+
 /**
+ *  @file
+ *  writing preprocess_page
+ *  using views_embed_view('machine_name','block_title')
+ */
+
+/**
+ * & - is a reference 
+ */
+
+function dupela_preprocess_page(&$variables){
+    //$variables['author_name'] = "edited name!";
+    $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
+    //$variables['next'] = views_embed_view('next', 'block_2');
+    //dump($variables['dupela_icon_navigation']);
+}
+
+/**
+ *  @file
+ *  writting preprocess_region
+ *
+ */
+
+function dupela_preprocess_region(&$variables){
+    //$variables['author_name'] = "edited name!";
+    $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
+    //$variables['next'] = views_embed_view('next', 'block_2');
+    //dump($variables['dupela_icon_navigation']);
+}
+
+/*
+ *  Implements  hook_form_alter()
+ * 
+*/
+function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    if (in_array($form_id, ['search_block_form'])) {
+        $form['keys']['#attributes']['placeholder'] = t('Search...');
+        $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search_results_submit';
+        //$form['actions']['submit']['#attributes']['id'] = "search_block_form";
+        //$form['actions']['submit']['#attributes']['class'] = ['text-color-white', 'fas', 'fa-search'];
+        //$form['actions']['submit']['#attributes']['value'] = '#f002';
+        //dump($form);
+    }
+}
+
+/*
+ * Implements template_preprocess_input
+
+ 
+function dupela_preprocess_form(&$variables) {
+    
+    //dump($variables);
+   // dump($variables['element']);
+   
+    if($variables['element']['#form_id'] == 'search_block_form'){
+        //$variables['element']['actions']['submit']['#attributes']['id'] = "search_block_form";
+        //$variables['element']['actions']['submit']['#attributes']['class'] = ['text-color-white', 'fas' , 'fa-search'];
+        //dump($variables['element']);
+    }
+    
+}
+
+
+
+ *  Implements theme_preprocess_form()
+ * 
+ *
+function dupela_preprocess_form(&$variables){
+
+    if($variables['element']['#form_id'] == 'search_block_form'){
+
+      //dump($variables['element']);
+    }
+    
+}
+
+/*
  * Implements hook_theme_suggestions_HOOK().
  
 */ 
@@ -44,22 +169,4 @@ function dupela_theme_suggestions_block_alter(array &$suggestions, array $variab
 */
 
 
-/**
- *  @file
- *  writing preprocess_node 
- *  using views_embed_view('machine_name','block_title')
- */
 
-/**
- * & - is a reference 
- */
-
-/*
-function dupela_preprocess_node(&$variables){
-   //$variables['author_name'] = "edited name!";
-    $variables['next_and_prev'] = views_embed_view('next_and_prev', 'block_1');
-    $variables['next'] = views_embed_view('next', 'block_2');
-    //dump($variables['next_and_prev']);
-}
-
-*/
