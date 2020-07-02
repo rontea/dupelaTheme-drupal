@@ -12,4 +12,11 @@
  * @ingroup themeable
  */
 #}
-<input{{ attributes }} />{{ children }}
+
+{%
+    set classes = ['btn', 'btn-primary']
+%}
+
+ <button {{ attributes.addClass(classes) }}>
+    Submit
+</button>

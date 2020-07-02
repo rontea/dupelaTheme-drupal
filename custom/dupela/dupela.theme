@@ -4,6 +4,13 @@
  * Implements hook_theme_suggestions_HOOK().
  * 
  */
+// breadcrumb
+// view view grid
+function dupela_theme_suggestions_breadcrumb_alter(array &$suggestions, array $variables) {
+    // If you want you can add a template suggestion for all views
+    // based on their ID:
+    $suggestions[] = sprintf('breadcrumb__dupela_breadcrumbs');
+}
 
 // view view grid
 function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
@@ -23,36 +30,48 @@ function dupela_theme_suggestions_form_alter(array &$suggestions, array $variabl
     // If you want you can add a template suggestion for all views
     // based on their ID:
    
-
+    // Search top
     if ( $variables['element']['#form_id'] === 'search_block_form') {
         $suggestions[] = sprintf('form__search_block_form');
         //dump($variables['element']);
     }
-
-    
+    // Login
+    if ( $variables['element']['#form_id'] === 'user_login_form') {
+        $suggestions[] = sprintf('form__user_login_form');
+        // dump($variables['element']);
+    }
    // dump($variables['element']);
 }
+// form element
+function dupela_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+    // auto generate suggention for input and submit
+    $element = $variables['element'];
+
+    if (isset($element['#attributes']['data-twig-suggestion'])) {
+        $suggestions[] = 'form_element__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+    }
+    //dump($variables['element']);
+}
+
 
 // input 
 function dupela_theme_suggestions_input_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:
     
-    
+    // search input
     if($variables['theme_hook_original'] == "input__search") {
         $suggestions[] = sprintf('input__search__search_block_form');
     }
 
-    //if($variables['theme_hook_original'] == "input__submit") {
-      //  $suggestions[] = sprintf('input__submit__search_results_submit');
-    //}
-    // getting the input submit to work
+
+    // auto generate suggention for input and submit
     $element = $variables['element'];
 
     if (isset($element['#attributes']['data-twig-suggestion'])) {
+    
         $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
     }
-    //dump($variables);
      
 }
 
@@ -96,11 +115,14 @@ function dupela_preprocess_region(&$variables){
     //dump($variables['dupela_icon_navigation']);
 }
 
+
+
 /*
  *  Implements  hook_form_alter()
  * 
 */
 function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    // search form
     if (in_array($form_id, ['search_block_form'])) {
         $form['keys']['#attributes']['placeholder'] = t('Search...');
         $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search_results_submit';
@@ -108,6 +130,12 @@ function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_st
         //$form['actions']['submit']['#attributes']['class'] = ['text-color-white', 'fas', 'fa-search'];
         //$form['actions']['submit']['#attributes']['value'] = '#f002';
         //dump($form);
+    }
+    // login form
+    if (in_array($form_id, ['user_login_form'])) {
+        $form['name']['#attributes']['data-twig-suggestion'] = 'user_login_form_name';
+        $form['pass']['#attributes']['data-twig-suggestion'] = 'user_login_form_pass';
+        $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'user_login_form_action';
     }
 }
 

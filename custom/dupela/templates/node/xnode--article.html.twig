@@ -86,31 +86,29 @@
      
 {% endif %}
 
-<div class="content-area container seperator color-lighten text-white mb-4" {{ attribute}}>
+<div class="content-area container seperator color-lighten text-white mb-4">
     <div class="article-title-read  mt-2">
-        <h2>{{ label }}</h2>
+        <h2>{{ }}</h2>
     </div>
     <div class="p-2">
 
         <div class="article-profile-read d-flex flex-row">
             <div class="article-img-author-read d-flex flex-row">
                 <div class="article-img-wrap-read">
-                    {{ author_picture }}
+                    {{  }}
                 </div>
 
                 <div class="article-author-wrap ml-2">
                     <div class="article-heading-author-read">Author {{ title_prefix }}</div>
                     <div class="article-name-read">
-                        <a href="#">{{ author_name }}</a>
+                        <a href="#">{{ }}</a>
                     </div>
-
                 </div>
             </div>
 
             <div class="article-information-read ml-4">
                 <div class="article-label-read"> Date </div>
-                <div class="article-date-read"> {{ content.field_date }}</div>
-
+                <div class="article-date-read"> {{  }}</div>
             </div>
 
         </div>
@@ -128,7 +126,7 @@
                         {{ }}
                         </div>
                         <div class="article-label-read">
-                           Last Update : {{ node.changed.value|date('m/d/Y') }}
+                           Last Update : {# node.changed.value|date('m/d/Y') #}
                         </div>
                         <div class="article-next ml-auto">
                         {{ }}
@@ -139,20 +137,20 @@
                         Image google adds
                         <!-- img src="./img/addgoogleh.png syk" alt="add google horizontal"> -->
                     </div>
-                    <div class="article" {{ content_attributes }}>
+                    <div class="article" {{  }}>
                         <article>
                             <div class="article-read-image pt-2 pb-2">
-                            {{ content.field_image }}
+                            {{  }}
                             </div>
-                            {{ content.body }}
+                            {{ }}
                         </article>
                     </div>
 
                     <div class="article-information-read title-text-6">
-                        <div class="article-type-read"> {{ content.field_tags }} </div>
+                        <div class="article-type-read"> {{  }} </div>
                     </div>
                     <div class="article-information-read title-text-6">
-                        <div class="article-type-read"> {{ content.field_category }} </div>
+                        <div class="article-type-read"> {{ }} </div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -166,8 +164,6 @@
         </div>
 
     </div>
-
-    
 </div>
 
 
