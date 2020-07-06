@@ -27,7 +27,12 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }} class="smart-tiles">
+
+{%
+  set classes = ['smart-tiles']
+%}
+
+<div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if label %}
     <h2{{ title_attributes }}>{{ label }}</h2>

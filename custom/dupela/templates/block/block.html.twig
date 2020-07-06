@@ -27,13 +27,17 @@
  * @ingroup themeable
  */
 #}
-  {{ title_prefix }}
-  {% if label %}
-  <div class="glo-article-heading">
-    <div class="article-title"> <span>{{ label }}</span> </div>
+<section class="section">
+  <div{{ attributes }}>
+    {{ title_prefix }}
+    {% if label %}
+      <div class="glo-article-heading">
+        <div class="article-title"> <span {{ title_attributes }} >{{ label }}</span> </div>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
   </div>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+</section>
