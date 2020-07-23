@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation to display a node.
+ * Bartik's theme implementation to display a node.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -64,64 +64,59 @@
  *   is an administrator.
  *
  * @see template_preprocess_node()
- *
- * @todo Remove the id attribute (or make it a class), because if that gets
- *   rendered twice on a page this is invalid CSS for example: two lists
- *   in different view modes.
- *
- * @ingroup themeable
  */
 #}
-{{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-{{ title_suffix }}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
 
+ {% if label and not page %}
+<div class="article-post  p-2 mt-4">
+    <div class="article-image">
+        {{ content.field_image }} 
+    </div>
 
-{# content area #}
+    <div class="article-information">
+        <span class="article-type">{{ content.field_category }}  </span> <span class="article-date"> {{ content.field_date }} </span>
+    </div>
+    <div class="article-title">
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </div>
+    <div class="article-profile m-2">
+        <div class="article-img-author d-flex flex-row">
+            <div class="article-img-wrap">
+                {{ author_picture }} 
+            </div>
 
-<div class="article">
-    <article{{ attributes }}>
-        <div {{ content_attributes }}>
-        {#{ content }#}
-        <div class="article-read-image pt-2 pb-2">
-            {{ content.field_image }}
+            <div class="article-author-wrap ml-2 d-flex flex-column">
+                <div class="article-heading-author">Author</div>
+                <div class="article-name">
+                    {{ author_name }} 
+                </div>
+
+            </div>
         </div>
+
+    </div>
+
+    <div class="article-teaser">
         {{ content.body }}
-        </div>
-    </article>
+    </div>
+    <div class="article-read-more mt-2">
+        <a href="{{ url }}" class="btn btn-primary">Read Full Article</a>
+    </div>
+    <div class="article-category mt-2 d-flex">
+        <div class="ml-auto"> {{ content.field_tags }} </div>
+    </div>
 </div>
+ {% endif %}
 
-<div class="article-information-read title-text-6">
-    <div class="article-type-read"> {{ content.field_related_content}} </div>
-</div>
-<div class="article-information-read title-text-6">
-    <div class="article-type-read"> {{ content.field_tags}} </div>
-</div>
-
-{# need to update #}
-{% if is_admin %}
-<div class="container-fluid inset-2 color-4">
-    {% if display_submitted %}
-        <footer>
-        {{ author_picture }}
-        <div{{ author_attributes }}>
-            {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-            {{ metadata }}
-        </div>
-        </footer>
-    {% endif %}
-</div>
-{% endif %}
-
-{#
-    {{ author_picture }}
-    {{ author_name }} 
-    {{ date }}
-    {{ url }}
-    {{ content.links }}
-    {{ content.field_display }}
-#}
+    

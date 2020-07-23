@@ -27,8 +27,34 @@
  * @ingroup themeable
  */
 #}
+{#  set the background #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'main-wrapper',
+  ]
+
+%}
+{# set content limitation #}
+{%
+  set wrapper_block = ['wrapper-limitation',]
+%}
+{# set content section #}
+{%
+  set section_class = ['section-wrap',]
+%}
+{# set content wrapper #}
+{%
+  set container_class = ['container-wrap',]
+%}
+
+
+{% if label %}
 <section class="section">
-  <div{{ attributes }}>
+{% endif %}
+  <div{{ attributes.addClass(classes) }}>
     {{ title_prefix }}
     {% if label %}
       <div class="glo-article-heading">
@@ -36,8 +62,16 @@
       </div>
     {% endif %}
     {{ title_suffix }}
-    {% block content %}
-      {{ content }}
-    {% endblock %}
+    <div {{ attributes.addClass(container_class) }}>
+      <section {{ attributes.addClass(section_class) }}>
+        {% block content %}
+          <div {{ content_attributes.addClass('content') }} {{ attributes.addClass(wrapper_block) }}>
+          {{ content }}
+          </div>
+        {% endblock %}
+      </section>
+    </div>
   </div>
+{% if label %}
 </section>
+{% endif %}

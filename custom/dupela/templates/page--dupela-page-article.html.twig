@@ -50,48 +50,36 @@
         {{ page.breadcrumb }}
     {% endif %} 
   <div class="page-title">
-    {% if page.header%}
      {{ page.header }}
-    {% endif %}
   </div>
-</div>
+  <div class="page-description mt-4">
+    There are alot of things , browse some of the written goodess here check out the categories below. 
+  </div>
 
-{% if page.content_article %}
-    <div class="content-area container color-lighten text-white mb-4">
-        <div class="p-2">
-            {% if page.content_article %}
-                {{page.content_article}}
-            {% endif %}
-
-            {# prev and next with updated date #}
-            
+    <div class="page-article-category row container mt-4 mb-4">
+        <div class="col">
+        {{ page.highlighted }}
         </div>
-    </div>
-{% endif %}
 
-<div class="color-4">
-    <div class="content-area mx-auto">
-        <div class="container-fluid">
-                <div class="article-read">
-                    {# google adds #}
-                 
-                    {# Page Content #}
-                    {% if page.content %}
-                        {{ page.content }}
-                    {% endif %} 
-                </div>
+        <div class="col-auto">
+            Articles 70
         </div>
     </div>
 </div>
 
-<div class="color-4">
-    <div class="content-area mx-auto">
-        {% if page.footer_first %}
-            {{ page.footer_first }}
-            {# subcription email #}
-        {% endif %}
-    </div>
+
+<div class="content-area mt-4 row mx-auto color-4">
+{# Page Content #}
+    <div class="col-md-8">
+        {% if page.content %}
+            {{ page.content }}
+        {% endif %} 
+   </div>
+   <div class="col-md-4">
+
+   </div>
 </div>
+{# Subcribers #}
 {# footer #}
 {% include '@dupela/includes/footer/footer.html.twig' %}
 {# end footer #}

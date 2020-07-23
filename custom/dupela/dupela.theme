@@ -98,8 +98,12 @@ function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $
 function dupela_preprocess_page(&$variables){
     //$variables['author_name'] = "edited name!";
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
-    //$variables['next'] = views_embed_view('next', 'block_2');
     //dump($variables['dupela_icon_navigation']);
+    $variables['dupela_about_service'] = views_embed_view('dupela_about_service', 'dupela_about_service');
+    $variables['dupela_site_article_home'] = views_embed_view('dupela_site_article_home', 'block_1');
+    $variables['dupela_featured_article'] = views_embed_view('dupela_featured_article', 'block_1');
+    $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
+    $variables['dupela_smart_tiles'] = views_embed_view('dupela_smart_tiles', 'block_1');
 }
 
 /**
@@ -115,10 +119,9 @@ function dupela_preprocess_region(&$variables){
     //dump($variables['dupela_icon_navigation']);
 }
 
-
-
-/*
- *  Implements  hook_form_alter()
+/** 
+ * @file
+ * Implements  hook_form_alter()
  * 
 */
 function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
