@@ -52,28 +52,29 @@
 
 
 
-
-{% if label %}
-<section class="section">
-{% endif %}
-  <div{{ attributes.addClass(classes) }}>
-    {{ title_prefix }}
+<div class="content-area mx-auto">
     {% if label %}
-      <div class="glo-article-heading">
-        <div class="article-title"> <span {{ title_attributes }} >{{ label }}</span> </div>
-      </div>
+    <section class="section">
     {% endif %}
-    {{ title_suffix }}
-    <div {{ attributes.addClass(container_class) }}>
-      <section {{ attributes.addClass(section_class) }}>
-        {% block content %}
-          <div {{ content_attributes.addClass('content') }} {{ attributes.addClass(wrapper_block) }}>
-          {{ content }}
-          </div>
-        {% endblock %}
-      </section>
+    <div{{ attributes.addClass(classes) }}>
+        {{ title_prefix }}
+        {% if label %}
+        <div class="glo-article-heading">
+            <div class="article-title"> <span {{ title_attributes }} >{{ label }}</span> </div>
+        </div>
+        {% endif %}
+        {{ title_suffix }}
+        <div {{ attributes.addClass(container_class) }}>
+        <section {{ attributes.addClass(section_class) }}>
+            {% block content %}
+            <div {{ content_attributes.addClass('content') }} {{ attributes.addClass(wrapper_block) }}>
+            {{ content }}
+            </div>
+            {% endblock %}
+        </section>
+        </div>
     </div>
-  </div>
-{% if label %}
-</section>
-{% endif %}
+    {% if label %}
+    </section>
+    {% endif %}
+</div>

@@ -61,7 +61,7 @@
     <div class="content-area mx-auto p-4 container">
     <section class="section">
         {% if page.content %}
-            <div class="form-login mx-auto border">
+            <div class="form-login border">
                 <div class="login-title text-center content-title">
                     Login
                 </div>
@@ -72,7 +72,14 @@
     </div>
 </div>
 
-
+{# about #}
+<div class="about-wrap">
+    <div class="content-area mx-auto">
+        <section class="section">
+            {{ dupela_about_service }}
+        </section>
+    </div>
+</div>
 
   {# footer #}
     {% include '@dupela/includes/footer/footer.html.twig' %}

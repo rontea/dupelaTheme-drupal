@@ -56,22 +56,26 @@
   </div>
 </div>
 
-{% if page.content_article %}
-    <div class="content-area container color-lighten text-white mb-4">
-        <div class="p-2">
-            {% if page.content_article %}
-                {{page.content_article}}
-            {% endif %}
 
-            {# prev and next with updated date #}
-            
-        </div>
+<div class="color-4">
+    <div class="content-area mx-auto">
+        <section class="section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg">
+                            {# Page Content #}
+                            {% if page.content %}
+                                {{ page.content }}
+                            {% endif %} 
+                    </div>
+                    <div class="col-lg-4">
+
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-{% endif %}
-
-{% if page.content %}
-    {{ page.content }}
-{% endif %} 
+</div>
 
 <div class="color-4">
     <div class="content-area mx-auto">

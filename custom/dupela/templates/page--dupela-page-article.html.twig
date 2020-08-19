@@ -62,7 +62,7 @@
         </div>
 
         <div class="col-auto">
-            Articles 70
+             {{ dupela_article_count}}
         </div>
     </div>
 </div>
@@ -71,17 +71,21 @@
 <div class="content-area mt-4 row mx-auto color-4">
 {# Page Content #}
     <div class="col-md-8">
-        {% if page.content %}
-            {{ page.content }}
-        {% endif %} 
+        <section class="section">
+            {% if page.content %}
+                {{ page.content }}
+            {% endif %} 
+        </section>
    </div>
    <div class="col-md-4">
-
+    <section class="section">
+            {{ page.sidebar_first}}
+    </section>
    </div>
 </div>
 {# Subcribers #}
 {# footer #}
-{% include '@dupela/includes/footer/footer.html.twig' %}
+{% include '@dupela/includes/footer/article--footer.html.twig' %}
 {# end footer #}
 
 

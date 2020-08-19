@@ -22,5 +22,6 @@ regions:
   sidebar_second: 'Sidebar second'
   footer_first: 'Footer first'
   footer: 'Footer'
+  footer_article: 'Footer Article'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
