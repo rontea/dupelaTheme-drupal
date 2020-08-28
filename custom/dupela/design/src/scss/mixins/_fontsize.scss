@@ -169,6 +169,6 @@ $font-size in $bg-font-size {
 }
 
 .content-md-title {
-    font-weight: bold;
-    @include text-mod(14px,16px);
+    
+    @include text-mod(16px,18px);
 }
