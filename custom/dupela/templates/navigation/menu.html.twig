@@ -33,23 +33,51 @@
   {% if items %}
 
     {% if menu_level == 0 %}
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" {{ attributes.addClass('menu') }}>
     {% else %}
-      <ul class="dropdown-menu drop-down-primary" aria-labelledby="navbarDropdown">
+      <ul class="dropdown-menu drop-down-primary menu" aria-labelledby="navbarDropdown">
     {% endif %}
 
     {% for item in items %}
+        {%
+          set classes_top = [
+            'nav-item',
+            item.is_expanded ? 'menu-item--expanded',
+            item.is_collapsed ? 'menu-item--collapsed',
+            item.in_active_trail ? 'active',
+          ]
+        %}
+
+        {%
+          set classes_has_below = [
+            'nav-item', 'dropdown',
+            item.is_expanded ? 'menu-item-below--expanded',
+            item.is_collapsed ? 'menu-item--collapsed',
+            item.in_active_trail ? 'active',
+          ]
+        %}
+
+             {%
+          set classes_drop_item = [
+            
+            item.is_expanded ? 'menu-item-below--expanded',
+            item.is_collapsed ? 'menu-item--collapsed',
+            item.in_active_trail ? 'below-active',
+          ]
+        %}
+
         {% if item.below  %}
           {# main - if item has sub level it will be available on level one with dropdown #}
-          <li class="nav-item dropdown" {{ attributes.addClass(is_active ? 'active') }}>
+          <li  {{ item.attributes.addClass(classes_has_below) }}>
           <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
             {{ item.title}} 
           </a>
            {{ menus.menu_links(item.below, attributes, menu_level + 1) }} 
         {% else %}
+        
          {% if menu_level == 0 %}
            {# main level 1 item #}
-          <li class="nav-item" {{ attributes.addClass(is_active ? 'active') }}>
+          <li  {{ item.attributes.addClass(classes_top) }}>
             <a class="nav-link" href="{{item.url}}">
               {{ item.title }}
             </a>
@@ -57,7 +85,7 @@
 
           {% else %}
           {# sub level 1 item under the below #}
-          <li {{ attributes.addClass(is_active ? 'active') }}>
+          <li  {{ item.attributes.addClass(classes_drop_item) }}>
               <a class="dropdown-item" href="{{item.url}}">
               {{ item.title }}
               </a>

@@ -19,3 +19,34 @@
     background-color: #E2411E;
     color: $p-color-white;
 }
+
+
+// use in menu local task
+ 
+    ul {
+        &.task-button {
+            li {
+                display: inline;
+
+              a {
+                  @include reset-a-all($p-color-1,$p-color-white);
+                  padding: 3px 10px 3px 10px;
+                  background-color: $p-color-4;
+                  border-radius: 5px;
+
+                  border: solid $p-color-1 1px;
+
+                  &:hover {
+                    background-color: $p-color-1;
+                    color: $p-color-white;
+                  }
+                  &.is-active {
+                    background-color: $p-color-1;
+                    color: $p-color-white;
+                  }
+              }
+
+            }
+        }
+        
+    }

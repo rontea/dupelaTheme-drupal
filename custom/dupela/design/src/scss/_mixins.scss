@@ -396,3 +396,13 @@ $color in $bg-colors {
         content: fa-content(#{$fa-var});
     }
 }
+
+// color lighten
+
+@mixin color-background-lighten($color) {
+    background-color: lighten($color, 20%);
+}
+
+@mixin color-background-darken($color) {
+    background-color: darken($color, 20%);
+}

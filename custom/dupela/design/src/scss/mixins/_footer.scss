@@ -41,6 +41,9 @@ footer {
             li {
                 padding-left: 12px;
                 opacity: 60%;
+                &:empty{
+                    display: none;
+                }
             }
         }
 
@@ -50,19 +53,24 @@ footer {
             column-fill: balance;
             column-count: 2;
             
+            
+
             li {
                 margin-left: 20px;
                 opacity: 60%;
+                &:empty{
+                    display: none;
+                }
             }
 
             @include media-breakpoint-down(lg) {
               column-count: 1;
-              
+              column-span: all;
             }
 
             @include media-breakpoint-down(md) {
                 column-count: 2;
-                
+                column-span: all;
             }
             @include media-breakpoint-down(sm) {
                 column-span: all;

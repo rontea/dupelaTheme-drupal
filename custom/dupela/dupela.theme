@@ -1,5 +1,6 @@
 <?php 
 
+use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_theme_suggestions_HOOK().
@@ -20,6 +21,10 @@ function dupela_theme_suggestions_block_alter(array &$suggestions, array $variab
     $suggestions[] = sprintf('block__' + $variables['elements']['content']['#view_id']);
     //dump($variables['elements']['content']['#view_id']);
    
+}
+
+function dupela_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables){
+    $suggestions[] = sprintf('menu_local_tasks');
 }
 
  // breadcrumb
@@ -64,7 +69,7 @@ function dupela_theme_suggestions_form_alter(array &$suggestions, array $variabl
     // dump($variables['element']);
     }
 
-
+   
 }
 // form element
 function dupela_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
@@ -82,7 +87,9 @@ function dupela_theme_suggestions_form_element_alter(array &$suggestions, array 
 function dupela_theme_suggestions_input_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:
-    
+        
+   
+
     // search input
     if($variables['theme_hook_original'] == "input__search") {
         $suggestions[] = sprintf('input__search__search_block_form');
@@ -92,14 +99,15 @@ function dupela_theme_suggestions_input_alter(array &$suggestions, array $variab
     // auto generate suggention for input and submit
     $element = $variables['element'];
 
+  
+  
     if (isset($element['#attributes']['data-twig-suggestion'])) {
-    
-        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+       
+        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];           
     }
-     
-}
 
-// all
+    
+}
 
 function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
     //dump($hook);
@@ -130,6 +138,26 @@ function dupela_preprocess_page(&$variables){
     $variables['dupela_smart_tiles'] = views_embed_view('dupela_smart_tiles', 'block_1');
     $variables['dupela_article_count'] = views_embed_view('dupela_article_count', 'block_1');
 }
+
+
+/**
+ * Implements hook_page_alter
+ */
+function dupela_page_alter(&$page) {
+
+    $node = menu_get_object();
+    if (!empty($node->type) && ($node->type == 'CONTENT_TYPE')) {
+      $breadcrumbs = array();
+      $breadcrumbs[] = l(t('Home'), '<front>');
+      $breadcrumbs[] = l('Article', '/node');
+    
+      drupal_set_breadcrumb($breadcrumbs);
+  
+      // Bonnus I also needed to add some custom CSS for this page
+      drupal_add_css(drupal_get_path('module', 'MODULENAME') . '/css/CONTENT_TYPE.css', array('group' => CSS_DEFAULT, 'type' => 'file'));
+  
+    }
+  }
 
 /**
  *  @file
@@ -233,3 +261,21 @@ function dupela_theme_suggestions_block_alter(array &$suggestions, array $variab
 
 
 
+/**
+ *  Template update for Breadcrumbs to show current page
+ */
+
+function dupela_preprocess_breadcrumb(&$variables) {
+    if ($variables['breadcrumb']) {
+      $request = \Drupal::request();
+      $route_match = \Drupal::routeMatch();
+      $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+      
+      if (!empty($page_title)) {
+        $variables['breadcrumb'][] = [
+          'text' => $page_title,
+          'attributes' => new Attribute(['class' => ['active']])
+        ];
+      }
+    }
+}
