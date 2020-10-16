@@ -2,25 +2,25 @@
 
 use Drupal\Core\Template\Attribute;
 
-/**
- * Implements hook_theme_suggestions_HOOK().
- *  
- */
-function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-
-    // block--system-main-block.html.twig 
-    $suggestions[] = sprintf('page__' + 'node__landing_page');
-   
-   
-}
 
 
-function dupela_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+function dupela_theme_preprocess_breadcrumb(&$variables) {
+    $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
 
-    // block--system-main-block.html.twig 
-    $suggestions[] = sprintf('block__' + $variables['elements']['content']['#view_id']);
-    //dump($variables['elements']['content']['#view_id']);
-   
+  $variables['#cache']['contexts'][] = 'url';
+  if (count($variables['breadcrumb']) <= 1) {
+    $variables['breadcrumb'] = [];
+  }
+  else {
+    $breadcrumb_title = theme_get_setting('breadcrumb_title');
+    if ($breadcrumb_title) {
+      $variables['breadcrumb'][] = array(
+        'text' => $page_title
+      );
+    }
+  }
 }
 
 function dupela_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables){
@@ -141,25 +141,6 @@ function dupela_preprocess_page(&$variables){
 
 
 /**
- * Implements hook_page_alter
- */
-function dupela_page_alter(&$page) {
-
-    $node = menu_get_object();
-    if (!empty($node->type) && ($node->type == 'CONTENT_TYPE')) {
-      $breadcrumbs = array();
-      $breadcrumbs[] = l(t('Home'), '<front>');
-      $breadcrumbs[] = l('Article', '/node');
-    
-      drupal_set_breadcrumb($breadcrumbs);
-  
-      // Bonnus I also needed to add some custom CSS for this page
-      drupal_add_css(drupal_get_path('module', 'MODULENAME') . '/css/CONTENT_TYPE.css', array('group' => CSS_DEFAULT, 'type' => 'file'));
-  
-    }
-  }
-
-/**
  *  @file
  *  writting preprocess_region
  *
@@ -202,80 +183,3 @@ function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_st
     
 }
 
-/*
- * Implements template_preprocess_input
-
- 
-function dupela_preprocess_form(&$variables) {
-    
-    //dump($variables);
-   // dump($variables['element']);
-   
-    if($variables['element']['#form_id'] == 'search_block_form'){
-        //$variables['element']['actions']['submit']['#attributes']['id'] = "search_block_form";
-        //$variables['element']['actions']['submit']['#attributes']['class'] = ['text-color-white', 'fas' , 'fa-search'];
-        //dump($variables['element']);
-    }
-    
-}
-
-
-
- *  Implements theme_preprocess_form()
- * 
- *
-function dupela_preprocess_form(&$variables){
-
-    if($variables['element']['#form_id'] == 'search_block_form'){
-
-      //dump($variables['element']);
-    }
-    
-}
-
-/*
- * Implements hook_theme_suggestions_HOOK().
- 
-*/ 
-/* page
-function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-   // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('page__list_article');
-}
-* node
-function dupela_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('node__read_article');
-    $suggestions[] = sprintf('node__list_category_article');
-}
-function dupela_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('block__sitebranding_header');
-    $suggestions[] = sprintf('block__sitebranding_footer');
-
-}
-*/
-
-
-
-/**
- *  Template update for Breadcrumbs to show current page
- */
-
-function dupela_preprocess_breadcrumb(&$variables) {
-    if ($variables['breadcrumb']) {
-      $request = \Drupal::request();
-      $route_match = \Drupal::routeMatch();
-      $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-      
-      if (!empty($page_title)) {
-        $variables['breadcrumb'][] = [
-          'text' => $page_title,
-          'attributes' => new Attribute(['class' => ['active']])
-        ];
-      }
-    }
-}
