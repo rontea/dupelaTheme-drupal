@@ -11,11 +11,21 @@ header {
     .top-header {
       max-width: $max-width;
       height: 50px;
-  
-      .logo-top-header {
-        height: 40px;
-        width: 40px;
-        background-image: url(../img/Dupela40x40Black.png);
+      
+
+      .site-logo {
+        img  {
+          height: 40px;
+          width: 40px;
+          max-width: 40px;
+          max-height: 40px;
+        }
+        float: left;
+      }
+      
+
+      .site-name {
+        float: left;
       }
   
       // col
@@ -213,12 +223,14 @@ header {
       }
     }
   
-    .logo {
-      background-image: url(../img/DupelaLogo40x40.png);
-      background-repeat: no-repeat;
-      margin-top: 5px;
-      width: 40px;
-      height: 40px;
-      float: left;
-    }
+   .logo {
+      img {
+      
+        margin-top: 5px;
+        width: 40px;
+        height: 40px;
+        float: left;
+      }
+    float: left;
+   }
   }

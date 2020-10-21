@@ -47,9 +47,12 @@
 	<!-- Navigation Logo -->
 
 	<!-- Logo -->
-		<a class="navbar-brand d-sm-block d-lg-none" href="./"> <div class="logo"></div>
-
-	</a>
+		<a class="navbar-brand d-sm-block d-lg-none"  href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="text-reset text-decoration-none"> 
+			<div class="logo"> 
+				<img src="http://localhost:8080/draplearn/draplearn_development/web/themes/custom/dupela/logo.svg" class="mt-auto mb-auto" alt="{{ 'Home'|t }}">
+			</div>
+		
+		</a>
 	<button
 		class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbardupela" aria-controls="navbardupela" aria-expanded="false" aria-label="Toggle navigation">
 		<!-- Mobile Menu-->
