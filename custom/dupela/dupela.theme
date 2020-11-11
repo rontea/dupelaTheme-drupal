@@ -3,26 +3,6 @@
 use Drupal\Core\Template\Attribute;
 
 
-
-function dupela_theme_preprocess_breadcrumb(&$variables) {
-    $request = \Drupal::request();
-  $route_match = \Drupal::routeMatch();
-  $page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-
-  $variables['#cache']['contexts'][] = 'url';
-  if (count($variables['breadcrumb']) <= 1) {
-    $variables['breadcrumb'] = [];
-  }
-  else {
-    $breadcrumb_title = theme_get_setting('breadcrumb_title');
-    if ($breadcrumb_title) {
-      $variables['breadcrumb'][] = array(
-        'text' => $page_title
-      );
-    }
-  }
-}
-
 function dupela_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables){
     $suggestions[] = sprintf('menu_local_tasks');
 }
@@ -109,13 +89,6 @@ function dupela_theme_suggestions_input_alter(array &$suggestions, array $variab
     
 }
 
-function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-    //dump($hook);
-
-    if($hook == 'form') {
-        
-    }
-}
 
 /**
  *  @file
@@ -151,6 +124,14 @@ function dupela_preprocess_region(&$variables){
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
     //$variables['next'] = views_embed_view('next', 'block_2');
     //dump($variables['dupela_icon_navigation']);
+}
+/**
+ *  @file
+ *  writting preprocess_maintenance_page
+ *
+ */
+function dupela_preprocess_maintenance_page(&$variables) {
+    $variables['dupela_icon_navigation_minimal'] = views_embed_view('dupela_icon_navigation_minimal', 'block_1');
 }
 
 /** 
