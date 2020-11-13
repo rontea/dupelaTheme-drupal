@@ -13,11 +13,11 @@
         <div class="text-3 font-weight-bold inset-2">
             {% if site_name or site_slogan %}
                 {% if site_name %}
-                    <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a>
+                    {{ site_name }}
                 {% endif %}
             {% endif %}
         </div>
-        <div class="text-3 font-weight-bold inset-2">
+        <div class="text-3 font-weight-bold">
             {% if title %}
                 {{ title }}
             {% endif %}
@@ -29,16 +29,13 @@
                 {% endif %}
            
         </div>
-    <div class="seperator">
-        <a href="#" class="btn btn-primary"> More info >>></a>
-    </div>
 
 </div>
     {# footer #}
 <footer class="dark-footer">
     <div class="footer content-area container">
         <div class="footer-minimal text-center">
-            <div class="footer-company-name pt-4 text-4 font-weight-bold text-color-light">
+            <div class=" text-4 font-weight-bold text-color-light">
                 {% if site_name %}
                 {{ site_name }}
                 {% endif %}
@@ -52,7 +49,7 @@
                 {{ dupela_icon_navigation_minimal }}
             </div>
             <div class="footer-copyright pb-4 pt-4 caption">
-                © 2020 All Rights Reserved
+               {{ dupela_year_reserved }}
             </div>
         </div>
     </div>
