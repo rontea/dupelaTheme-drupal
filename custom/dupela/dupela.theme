@@ -111,6 +111,7 @@ function dupela_preprocess_page(&$variables){
     $variables['dupela_smart_tiles'] = views_embed_view('dupela_smart_tiles', 'block_1');
     $variables['dupela_article_count'] = views_embed_view('dupela_article_count', 'block_1');
     $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
+    
 }
 
 
