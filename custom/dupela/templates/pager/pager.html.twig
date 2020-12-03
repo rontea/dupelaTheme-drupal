@@ -30,6 +30,8 @@
  * @see template_preprocess_pager()
  */
 #}
+<section class="section col-12">
+<div class="container-fluid">
 {% if items %}
   <nav class="pager" role="navigation" aria-labelledby="{{ heading_id }}" aria-label="Page navigation example">
     <h4 id="{{ heading_id }}" class="visually-hidden">{{ 'Pagination'|t }}</h4>
@@ -97,3 +99,5 @@
     </ul>
   </nav>
 {% endif %}
+</div>
+</section>
