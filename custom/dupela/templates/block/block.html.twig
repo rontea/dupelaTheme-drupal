@@ -27,13 +27,55 @@
  * @ingroup themeable
  */
 #}
-  {{ title_prefix }}
-  {% if label %}
-  <div class="glo-article-heading">
-    <div class="article-title"> <span>{{ label }}</span> </div>
+{#  set the background #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'main-wrapper',
+  ]
+
+%}
+{# set content limitation #}
+{%
+  set wrapper_block = ['wrapper-limitation',]
+%}
+{# set content section #}
+{%
+  set section_class = ['section-wrap',]
+%}
+{# set content wrapper #}
+{%
+  set container_class = ['container-wrap',]
+%}
+
+
+<div class="content-area mx-auto color-4">
+
+{% if label %}
+<section class="section">
+{% endif %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {% if label %}
+      <div class="glo-article-heading">
+        <div class="article-title"> <span {{ title_attributes }} >{{ label }}</span> </div>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+    <div {{ attributes.addClass(container_class) }}>
+      <section {{ attributes.addClass(section_class) }}>
+        {% block content %}
+          <div {{ content_attributes.addClass('content') }} {{ attributes.addClass(wrapper_block) }}>
+          {{ content }}
+          </div>
+        {% endblock %}
+      </section>
+    </div>
   </div>
-  {% endif %}
-  {{ title_suffix }}
-  {% block content %}
-    {{ content }}
-  {% endblock %}
+{% if label %}
+</section>
+{% endif %}
+
+</div>

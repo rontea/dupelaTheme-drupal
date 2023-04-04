@@ -26,21 +26,58 @@ FOOTER
 }
 
 footer {
+ 
     .footer {
+        
         img {
             @include img-100;
         }
-
-        ul {
-
+        
+        ul.footer-nav-links {
+            
             padding: 14px;
             list-style: square;
 
             li {
                 padding-left: 12px;
                 opacity: 60%;
+                &:empty{
+                    display: none;
+                }
             }
         }
+
+        ul.footer-nav-links2 {
+            list-style: square; 
+            padding-left: 0;
+            column-fill: balance;
+            column-count: 2;
+            
+            
+
+            li {
+                margin-left: 20px;
+                opacity: 60%;
+                &:empty{
+                    display: none;
+                }
+            }
+
+            @include media-breakpoint-down(lg) {
+              column-count: 1;
+              column-span: all;
+            }
+
+            @include media-breakpoint-down(md) {
+                column-count: 2;
+                column-span: all;
+            }
+            @include media-breakpoint-down(sm) {
+                column-span: all;
+            }
+        }
+
+
         .footer-message,
         .footer-text,
         .footer-count-title,

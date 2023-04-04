@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{#  set the background #}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    'main-wrapper',
+  ]
+
+%}
+{# set content limitation #}
+{%
+  set wrapper_block = ['wrapper-limitation',]
+%}
+{# set content section #}
+{%
+  set section_class = ['section-wrap',]
+%}
+{# set content wrapper #}
+{%
+  set container_class = ['container-wrap',]
+%}
+
+
+
+<div class="content-area mx-auto">
+    {% if label %}
+    <section class="section">
+    {% endif %}
+    <div{{ attributes.addClass(classes) }}>
+        {{ title_prefix }}
+        {% if label %}
+        <div class="glo-article-heading">
+            <div class="article-title"> <span {{ title_attributes }} >{{ label }}</span> </div>
+        </div>
+        {% endif %}
+        {{ title_suffix }}
+        <div {{ attributes.addClass(container_class) }}>
+        <section {{ attributes.addClass(section_class) }}>
+            {% block content %}
+            <div {{ content_attributes.addClass('content') }} {{ attributes.addClass(wrapper_block) }}>
+            {{ content }}
+            </div>
+            {% endblock %}
+        </section>
+        </div>
+    </div>
+    {% if label %}
+    </section>
+    {% endif %}
+</div>

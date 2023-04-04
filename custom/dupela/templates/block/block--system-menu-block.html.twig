@@ -34,7 +34,7 @@
 
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
 
-<nav class="navbar navbar-expand-lg navbar-light color-4" id="header" role="navigation" aria-labelledby="{{ heading_id }}" {{ attributes|without('role', 'aria-labelledby') }}>
+<nav class="navbar navbar-expand-xl navbar-light color-4" id="header" role="navigation" aria-labelledby="{{ heading_id }}" {{ attributes|without('role', 'aria-labelledby') }}>
 
 	{# Label. If not displayed, we still provide it for screen readers. #}
   {% if not configuration.label_display %}
@@ -47,11 +47,14 @@
 	<!-- Navigation Logo -->
 
 	<!-- Logo -->
-		<a class="navbar-brand d-sm-block d-lg-none" href="./"> <div class="logo"></div>
-
-	</a>
+		<a class="navbar-brand d-sm-block d-lg-none"  href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="text-reset text-decoration-none"> 
+			<div class="logo"> 
+				<img src="http://localhost:8080/draplearn/draplearn_development/web/themes/custom/dupela/logo.svg" class="mt-auto mb-auto" alt="{{ 'Home'|t }}">
+			</div>
+		
+		</a>
 	<button
-		class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbardupela" aria-controls="navbardupela" aria-expanded="false" aria-label="Toggle navigation">
+		class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbardupela" aria-controls="navbardupela" aria-expanded="false" aria-label="Toggle navigation">
 		<!-- Mobile Menu-->
 		☰
 	</button>

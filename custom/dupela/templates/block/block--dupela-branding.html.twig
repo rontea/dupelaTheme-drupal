@@ -34,5 +34,14 @@
   {% endif %}
   {{ title_suffix }}
   {% block content %}
-    {{ site_name }}
+      <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="text-reset text-decoration-none ">
+         <div class="site-logo">
+          <img src="{{ site_logo }}" class="logo-top-header mt-auto mb-auto" alt="{{ 'Home'|t }}">
+        </div>
+         <div class="site-name">
+          {{ site_name }}
+        </div>
+      </a>
+      
+      
   {% endblock %}

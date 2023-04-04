@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the flippy pager.
+ *
+ * Available variables:
+ * - node: The current node.
+ * - first: The first pager link.
+ * - prev: The previous pager link.
+ * - random: The random pager link.
+ * - next: The first pager link.
+ * - last: The last pager link.
+ *
+ * @see template_preprocess_flippy()
+ *
+ * @ingroup themeable
+ */
+#}
+
+   {# prev and next with updated date #}
+<div class="article-information-read p-2 d-flex flew-row">
+    {% if first %}
+        {{ first }}
+    {% endif %}
+{% if prev %}
+    <div class="article-prev mr-4">
+        {{ prev }}
+    </div>
+{% endif %}
+    {% if random %}
+        {{ random }}
+    {% endif %}
+{% if next %}
+    <div class="article-next ml-auto">
+        {{ next }}
+    </div>
+{% endif %}
+    {% if last %}
+        {{ last }}
+    {% endif %}
+</div>

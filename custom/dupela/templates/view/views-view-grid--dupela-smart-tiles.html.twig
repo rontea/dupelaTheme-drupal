@@ -27,48 +27,37 @@
  */
 #}
 
-
-{%
-  set classes = [
-    'views-view-grid',
-    options.alignment,
-    'cols-' ~ options.columns,
-    'clearfix',
-  ]
-%}
-
-
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
 <div class="smart-tiles">
-  <div class="row">
+  <div class="row no-gutters">
       {% for row in items %}
             {% for column in row.content %}
               {% if loop.index == 1 %}
-                <div class="{{ loop.index }} col-lg-6 left-item-image">
+    <div class="{{ loop.index }} col-lg-6 left-item-image">
                 {{ column.content }}
-                </div>
+    </div>
               {% else %}
                 
                   {% if loop.index == 2 %}
-                    <div class="{{ loop.index }} col-lg-6 right-item-image">
-                      <div class="row">
+    <div class="{{ loop.index }} col-lg-6 right-item-image">
+        <div class="row">
                         <div class="{{ loop.index }} col-lg-12 top">
                           {{ column.content }}
                         </div>
-                      </div>
+        </div>
                   
                   {% else %}
                     {% if loop.index == 3 %}
-                    <div class="row">
+        <div class="row">
                     {% endif %}
                       <div class="{{ loop.index }} col-md-6 bottom">
                         {{ column.content }}
                       </div>
                   {% if loop.index == 4 %}
-                    </div>
-                  </div>
+                  
+        </div>
                   {% endif %}
 
                 {% endif %}
@@ -76,7 +65,7 @@
               {% endif %}
               
             {% endfor %}
-        </div>
+    </div>
       {% endfor %}
   </div>    
 </div>

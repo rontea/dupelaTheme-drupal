@@ -1,10 +1,13 @@
 <?php 
 
-/**
- * Implements hook_theme_suggestions_HOOK().
- * 
- */
-// breadcrumb
+use Drupal\Core\Template\Attribute;
+
+
+function dupela_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables){
+    $suggestions[] = sprintf('menu_local_tasks');
+}
+
+ // breadcrumb
 // view view grid
 function dupela_theme_suggestions_breadcrumb_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
@@ -41,6 +44,12 @@ function dupela_theme_suggestions_form_alter(array &$suggestions, array $variabl
         // dump($variables['element']);
     }
    // dump($variables['element']);
+   if ( $variables['element']['#form_id'] === 'search_form') {
+    $suggestions[] = sprintf('form__list_form');
+    // dump($variables['element']);
+    }
+
+   
 }
 // form element
 function dupela_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
@@ -58,7 +67,9 @@ function dupela_theme_suggestions_form_element_alter(array &$suggestions, array 
 function dupela_theme_suggestions_input_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:
-    
+        
+   
+
     // search input
     if($variables['theme_hook_original'] == "input__search") {
         $suggestions[] = sprintf('input__search__search_block_form');
@@ -68,22 +79,16 @@ function dupela_theme_suggestions_input_alter(array &$suggestions, array $variab
     // auto generate suggention for input and submit
     $element = $variables['element'];
 
+  
+  
     if (isset($element['#attributes']['data-twig-suggestion'])) {
+       
+        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];           
+    }
+
     
-        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
-    }
-     
 }
 
-// all
-
-function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-    //dump($hook);
-
-    if($hook == 'form') {
-        
-    }
-}
 
 /**
  *  @file
@@ -98,9 +103,17 @@ function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $
 function dupela_preprocess_page(&$variables){
     //$variables['author_name'] = "edited name!";
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
-    //$variables['next'] = views_embed_view('next', 'block_2');
     //dump($variables['dupela_icon_navigation']);
+    $variables['dupela_about_service'] = views_embed_view('dupela_about_service', 'dupela_about_service');
+    $variables['dupela_site_article_home'] = views_embed_view('dupela_site_article_home', 'block_1');
+    $variables['dupela_featured_article'] = views_embed_view('dupela_featured_article', 'block_1');
+    $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
+    $variables['dupela_smart_tiles'] = views_embed_view('dupela_smart_tiles', 'block_1');
+    $variables['dupela_article_count'] = views_embed_view('dupela_article_count', 'block_1');
+    $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
+    
 }
+
 
 /**
  *  @file
@@ -111,14 +124,23 @@ function dupela_preprocess_page(&$variables){
 function dupela_preprocess_region(&$variables){
     //$variables['author_name'] = "edited name!";
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
+    $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
     //$variables['next'] = views_embed_view('next', 'block_2');
     //dump($variables['dupela_icon_navigation']);
 }
+/**
+ *  @file
+ *  writting preprocess_maintenance_page
+ *
+ */
+function dupela_preprocess_maintenance_page(&$variables) {
+    $variables['dupela_icon_navigation_minimal'] = views_embed_view('dupela_icon_navigation_minimal', 'block_1');
+    $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
+}
 
-
-
-/*
- *  Implements  hook_form_alter()
+/** 
+ * @file
+ * Implements  hook_form_alter()
  * 
 */
 function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
@@ -129,7 +151,7 @@ function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_st
         //$form['actions']['submit']['#attributes']['id'] = "search_block_form";
         //$form['actions']['submit']['#attributes']['class'] = ['text-color-white', 'fas', 'fa-search'];
         //$form['actions']['submit']['#attributes']['value'] = '#f002';
-        //dump($form);
+        
     }
     // login form
     if (in_array($form_id, ['user_login_form'])) {
@@ -137,64 +159,12 @@ function dupela_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_st
         $form['pass']['#attributes']['data-twig-suggestion'] = 'user_login_form_pass';
         $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'user_login_form_action';
     }
-}
-
-/*
- * Implements template_preprocess_input
-
- 
-function dupela_preprocess_form(&$variables) {
-    
-    //dump($variables);
-   // dump($variables['element']);
-   
-    if($variables['element']['#form_id'] == 'search_block_form'){
-        //$variables['element']['actions']['submit']['#attributes']['id'] = "search_block_form";
-        //$variables['element']['actions']['submit']['#attributes']['class'] = ['text-color-white', 'fas' , 'fa-search'];
-        //dump($variables['element']);
+    if (in_array($form_id, ['search_form'])) {
+        
+        $form['basic']['data-twig-suggestion'] = 'input__list__search';
+     
     }
+    //dump($form);
     
 }
-
-
-
- *  Implements theme_preprocess_form()
- * 
- *
-function dupela_preprocess_form(&$variables){
-
-    if($variables['element']['#form_id'] == 'search_block_form'){
-
-      //dump($variables['element']);
-    }
-    
-}
-
-/*
- * Implements hook_theme_suggestions_HOOK().
- 
-*/ 
-/* page
-function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-   // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('page__list_article');
-}
-* node
-function dupela_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('node__read_article');
-    $suggestions[] = sprintf('node__list_category_article');
-}
-function dupela_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('block__sitebranding_header');
-    $suggestions[] = sprintf('block__sitebranding_footer');
-
-}
-*/
-
-
 

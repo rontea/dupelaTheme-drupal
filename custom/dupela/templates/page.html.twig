@@ -50,10 +50,10 @@
         {{ page.breadcrumb }}
     {% endif %} 
   <div class="page-title">
-   {{ label}}
+     {{ page.header }}
   </div>
   <div class="page-description mt-4">
-    {{ content.description }}
+    
   </div>
 </div>
 
@@ -62,6 +62,8 @@
 {% if page.content %}
     {{ page.content }}
 {% endif %} 
+
+
 <!-- subcribers -->
 <div class="color-4">
     <div class="content-area mx-auto">

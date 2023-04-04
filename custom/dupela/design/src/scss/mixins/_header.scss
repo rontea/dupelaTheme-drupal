@@ -1,5 +1,7 @@
 //small device link indicator needed
 header {
+
+
     // row
     .row {
       @include reset-margin;
@@ -9,11 +11,21 @@ header {
     .top-header {
       max-width: $max-width;
       height: 50px;
-  
-      .logo-top-header {
-        height: 40px;
-        width: 40px;
-        background-image: url(../img/Dupela40x40Black.png);
+      
+
+      .site-logo {
+        img  {
+          height: 40px;
+          width: 40px;
+          max-width: 40px;
+          max-height: 40px;
+        }
+        float: left;
+      }
+      
+
+      .site-name {
+        float: left;
       }
   
       // col
@@ -83,12 +95,23 @@ header {
     // bottom header
     .bottom-header {
       max-width: $max-width;
-  
+   
       /* Nav var */
       .navbar {
-  
+    
         .navbar-nav {
+         
+          @include media-breakpoint-down(lg) {
+            overflow-y: auto !important;
+            max-height: 300px !important;
+          }
+
+          @include media-breakpoint-down(md) {
+            overflow-y: auto !important;
+            max-height: 250px !important;
+          }
   
+
           @include media-breakpoint-down(md) {
             padding-bottom: 5px;
           }
@@ -104,11 +127,12 @@ header {
             }
   
             @include media-breakpoint-down(md) {
-  
+              
               padding-top: 5px;
               padding-bottom: 5px;
               margin-bottom: 10px;
               padding-left: 10px;
+            
   
             }
   
@@ -130,12 +154,21 @@ header {
   
           }
   
-          /*
+          
           .active {
             .nav-link {
-              border-top: solid 5px $p-color-1;
+              @include media-breakpoint-up(lg) {
+                border-top: solid 5px $p-color-1;
+              }
+             
+              @include media-breakpoint-down(md) {
+                border-left: solid 5px $p-color-1;
+              }
             }
-          }*/
+
+          }
+
+
         }
   
         .navbar-brand {
@@ -151,7 +184,8 @@ header {
         .dropdown {
   
           padding: 0;
-  
+
+         
           .dropdown-menu {
   
             @include media-breakpoint-up(lg) {
@@ -160,6 +194,14 @@ header {
   
             @include media-breakpoint-down(md) {
               padding: 10px;
+            }
+
+            .below-active {
+              
+              .dropdown-item {
+               
+                border-left: 3px solid $p-color-1;
+              }
             }
   
             .dropdown-item {
@@ -171,6 +213,9 @@ header {
               &:hover {
                 border-left: 3px solid $p-color-1;
               }
+
+              
+      
             }
           }
         }
@@ -178,12 +223,14 @@ header {
       }
     }
   
-    .logo {
-      background-image: url(../img/DupelaLogo40x40.png);
-      background-repeat: no-repeat;
-      margin-top: 5px;
-      width: 40px;
-      height: 40px;
-      float: left;
-    }
+   .logo {
+      img {
+      
+        margin-top: 5px;
+        width: 40px;
+        height: 40px;
+        float: left;
+      }
+    float: left;
+   }
   }
