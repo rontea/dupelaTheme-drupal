@@ -50,18 +50,21 @@
  * @see html.html.twig
  */
 #}
-<div class="back-effect"></div>
+
 {# Header #}
 {% include '@dupela/includes/header/header.html.twig' %}
 {# end Header #}
 
-{# Smart Tiles #}
-<div class="content-area mx-auto">
-       <section class="section">
-                {{ dupela_smart_tiles }}
-       </section>
+{# Banner #}
+    {{ page.banner }}
+
+<div class="back-effect">
+
+
 </div>
-{# end Smart Tiles #}
+
+
+{# end Banner #}
 
 <div class="color-4">
     <div class="content-area mx-auto">
@@ -73,7 +76,7 @@
                     </div> 
                     <div class="row no-gutters">
                             <div class="col-12 col-lg-6 inset-left-2">
-                                {{ dupela_featured_article }}
+                                {{ page.features_first }}
                             </div>
                             <div class="col-12 col-lg-6 home-news-list">
                                 {{ dupela_article_list_home }}
@@ -89,9 +92,9 @@
         <section class="section">
             <div class="container-fluid">
                 <div class="glo-article-heading">
-                    <div class="article-title"> <span>Latest from Dupela</span> </div>
+                    <div class="article-title"> <span>What's in Works</span> </div>
                 </div>
-                {{ dupela_site_article_home }}
+                {{ dupela_article_in_works }}
             </div>
         </section>       
     </div>

@@ -35,12 +35,21 @@
   {{ title_suffix }}
   {% block content %}
       <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="text-reset text-decoration-none ">
-         <div class="site-logo">
-          <img src="{{ site_logo }}" class="logo-top-header mt-auto mb-auto" alt="{{ 'Home'|t }}">
+        <div class="site-logo">
+        {% if site_logo %}
+           
+            <img src="{{ site_logo }}" class="logo-top-header mt-auto mb-auto" alt="{{ 'Home'|t }}">
+            
+        {% endif %}
         </div>
-         <div class="site-name">
-          {{ site_name }}
-        </div>
+
+        
+        {% if site_name %}
+          <div class="site-name">
+            {{ site_name }}
+          </div>
+        {% endif %}
+
       </a>
       
       

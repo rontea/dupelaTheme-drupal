@@ -11,6 +11,7 @@ regions:
   header_first: 'Header first'
   header_second: 'Header second'
   header_search: 'Header search'
+  banner: 'Banner'
   navbar: 'Nav bar'
   features_first: 'Features first'
   help: 'help'

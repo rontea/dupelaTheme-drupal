@@ -1,6 +1,15 @@
 <?php 
 
 use Drupal\Core\Template\Attribute;
+// use in node
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\Breadcrumb\BreadcrumbManager;
+
+function dupela_preprocess(&$variables, $hook) {
+    $variables['base_path'] = base_path();
+}
+
 
 
 function dupela_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables){
@@ -20,6 +29,7 @@ function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, arr
     // If you want you can add a template suggestion for all views
     // based on their ID:
     $suggestions[] = sprintf('views_view_grid--dupela_smart_tiles', $variables['view']->id());
+  
 }
 // view view field
 function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
@@ -93,7 +103,7 @@ function dupela_theme_suggestions_input_alter(array &$suggestions, array $variab
 /**
  *  @file
  *  writing preprocess_page
- *  using views_embed_view('machine_name','block_title')
+ *  using views_embed_view('machine_name','page_title')
  */
 
 /**
@@ -101,20 +111,75 @@ function dupela_theme_suggestions_input_alter(array &$suggestions, array $variab
  */
 
 function dupela_preprocess_page(&$variables){
-    //$variables['author_name'] = "edited name!";
+
+    $config = \Drupal::config('system.site');
+
+    /** Header Navigation */
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
-    //dump($variables['dupela_icon_navigation']);
-    $variables['dupela_about_service'] = views_embed_view('dupela_about_service', 'dupela_about_service');
-    $variables['dupela_site_article_home'] = views_embed_view('dupela_site_article_home', 'block_1');
-    $variables['dupela_featured_article'] = views_embed_view('dupela_featured_article', 'block_1');
-    $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
-    $variables['dupela_smart_tiles'] = views_embed_view('dupela_smart_tiles', 'block_1');
+   
+
+
+    /** Used in Front Page  */
     $variables['dupela_article_count'] = views_embed_view('dupela_article_count', 'block_1');
+
+    $variables['dupela_article_in_works'] = views_embed_view('dupela_article_in_works', 'block_1');
+    $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
+    
+    //footer and navigation 
     $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
+    
+    $variables['site_name'] = $config->get('name');
+    $variables['site_slogan'] = $config->get('slogan');
     
 }
 
+/**
+ *  @file
+ *  writing preprocess_block
+ *  using views_embed_view('machine_name','node_title')
+ */
 
+/**
+ * & - is a reference 
+ */
+
+function dupela_preprocess_node(&$variables){
+
+// Get the current route match.
+$route_match = \Drupal::routeMatch();
+  
+// Get the breadcrumb builder.
+$breadcrumb_manager = \Drupal::service('breadcrumb');
+  
+// Build the breadcrumb for the current route match.
+$breadcrumb = $breadcrumb_manager->build($route_match);
+
+// Get the breadcrumb links and assign them to the template variable.
+$variables['breadcrumb'] = $breadcrumb->getLinks();
+
+}
+
+
+/**
+ *  @file
+ *  writing preprocess_block
+ *  using views_embed_view('machine_name','block_title')
+ */
+
+/**
+ * & - is a reference 
+ */
+
+function dupela_preprocess_block(&$variables){
+
+    // Get the site details to display on twig under block
+    $config = \Drupal::config('system.site');
+
+    $variables['site_name'] = $config->get('name');
+    $variables['site_slogan'] = $config->get('slogan');
+    $variables['site_logo'] = $config->get('logo');
+
+}
 /**
  *  @file
  *  writting preprocess_region
@@ -122,12 +187,16 @@ function dupela_preprocess_page(&$variables){
  */
 
 function dupela_preprocess_region(&$variables){
-    //$variables['author_name'] = "edited name!";
+   
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
+    $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
     $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
-    //$variables['next'] = views_embed_view('next', 'block_2');
-    //dump($variables['dupela_icon_navigation']);
+  
 }
+
+
+
+
 /**
  *  @file
  *  writting preprocess_maintenance_page

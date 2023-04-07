@@ -1,7 +1,8 @@
+
 {#
 /**
  * @file
- * Theme override to display a node.
+ * Default theme implementation to display a node.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
@@ -68,46 +69,112 @@
  * @todo Remove the id attribute (or make it a class), because if that gets
  *   rendered twice on a page this is invalid CSS for example: two lists
  *   in different view modes.
+ *
+ * @ingroup themeable
  */
 #}
 
-<div class="content-area mx-auto color-4">
-    <section class="section">
-        {%
-        set classes = [
-            'node',
-            'node--type-' ~ node.bundle|clean_class,
-            node.isPromoted() ? 'node--promoted',
-            node.isSticky() ? 'node--sticky',
-            not node.isPublished() ? 'node--unpublished',
-            view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-        ]
-        %}
-        {{ attach_library('claro/classy.node') }}
-        <article{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+    {% if label and not page %}
+        <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+    {% endif %}
+  {{ title_suffix }}
+{# Admin #}
+{% if is_admin %}
+     
+{% endif %}
 
-        {{ title_prefix }}
-        {% if label and not page %}
-            <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-            </h2>
-        {% endif %}
-        {{ title_suffix }}
+<div class="content-area container seperator color-lighten text-white mb-4">
+    <div class="article-title-read  mt-2">
+        <h2>{{ }}</h2>
+    </div>
+    <div class="p-2">
 
-        {% if display_submitted %}
-            <footer class="node__meta">
-            {{ author_picture }}
-            <div{{ author_attributes.addClass('node__submitted') }}>
-                {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-                {{ metadata }}
+        <div class="article-profile-read d-flex flex-row">
+            <div class="article-img-author-read d-flex flex-row">
+                <div class="article-img-wrap-read">
+                    {{  }}
+                </div>
+
+                <div class="article-author-wrap ml-2">
+                    <div class="article-heading-author-read">Author {{ title_prefix }}</div>
+                    <div class="article-name-read">
+                        <a href="#">{{ }}</a>
+                    </div>
+                </div>
             </div>
-            </footer>
-        {% endif %}
 
-        <div{{ content_attributes.addClass('node__content') }}>
-            {{ content }}
+            <div class="article-information-read ml-4">
+                <div class="article-label-read"> Date </div>
+                <div class="article-date-read"> {{  }}</div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="color-4 inset-top-2">
+    <div class="content-area mx-auto ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md">
+
+                    <div class="article-information-read p-2 d-flex flew-row">
+                        <div class="article-prev mr-4">
+                        {{ }}
+                        </div>
+                        <div class="article-label-read">
+                           Last Update : {# node.changed.value|date('m/d/Y') #}
+                        </div>
+                        <div class="article-next ml-auto">
+                        {{ }}
+                        </div>
+                    </div>
+
+                    <div class="google-ads-horizontal">
+                        Image google adds
+                        <!-- img src="./img/addgoogleh.png syk" alt="add google horizontal"> -->
+                    </div>
+                    <div class="article" {{  }}>
+                        <article>
+                            <div class="article-read-image pt-2 pb-2">
+                            {{  }}
+                            </div>
+                            {{ }}
+                        </article>
+                    </div>
+
+                    <div class="article-information-read title-text-6">
+                        <div class="article-type-read"> {{  }} </div>
+                    </div>
+                    <div class="article-information-read title-text-6">
+                        <div class="article-type-read"> {{ }} </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="google img-fit">
+                        <img src="./img/addsgoogle.png" alt="google ads">
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        </article>
-    </section>
+    </div>
 </div>
+
+
+{#
+    {{ content.field_title}}
+    {{ url }}
+    {{ content.links }}
+    {{ content.field_display }}
+#}
+
+
+
+
+

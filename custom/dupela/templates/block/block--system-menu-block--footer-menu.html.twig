@@ -32,54 +32,18 @@
  */
 #}
 
-{% set heading_id = attributes.id ~ '-menu'|clean_id %}
-
-<nav class="navbar navbar-expand-xl navbar-light color-4" id="header" role="navigation" aria-labelledby="{{ heading_id }}" {{ attributes|without('role', 'aria-labelledby') }}>
-
-	{# Label. If not displayed, we still provide it for screen readers. #}
+  {# Label. If not displayed, we still provide it for screen readers. #}
   {% if not configuration.label_display %}
     {% set title_attributes = title_attributes.addClass('visually-hidden') %}
   {% endif %}
   {{ title_prefix }}
   <h2{{ title_attributes.setAttribute('id', heading_id) }}>{{ configuration.label }}</h2>
   {{ title_suffix }}
-
-	<!-- Navigation Logo -->
-
-	<!-- Logo -->
-		<a class="navbar-brand d-sm-block d-lg-none"  href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="text-reset text-decoration-none"> 
-			{% if site_logo %}
-				<div class="logo"> 
-					<img src="{{ site_logo }}" class="mt-auto mb-auto" alt="{{ 'Home'|t }}">
-				</div>
-			{% else %}
-				<div class="logo">    
-
-           			 {{ site_name }}
-
-			
-
-				</div>
-			
-			{% endif %}
-		</a>
-	<button
-		class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbardupela" aria-controls="navbardupela" aria-expanded="false" aria-label="Toggle navigation">
-		<!-- Mobile Menu-->
-		☰
-	</button>
-	<!-- Navigation Links -->
-	<div class="collapse navbar-collapse" id="navbardupela">
-
-		<div class="mr-auto nav-link-wrap">
-      <!-- Links -->
-			<!-- Nav links -->
-          {# Menu. #}
-      {% block content %}
-        {{ content }}
-      {% endblock %}
-
-		</div>
-
-	</div>
-</nav>
+  {# Menu. #}
+  {% block content %}
+    <div class="col-12 col-md-10">
+      <div class="footer-links a-light p-md-4 pt-4 text-uppercase">
+    {{ content }}
+      </div>
+    </div>
+  {% endblock %}

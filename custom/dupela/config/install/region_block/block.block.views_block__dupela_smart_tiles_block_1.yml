@@ -1,0 +1,24 @@
+uuid: 6a4db549-d411-44a7-a6f9-0e7b96c59f1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.dupela_smart_tiles
+  module:
+    - views
+  theme:
+    - dupela
+id: views_block__dupela_smart_tiles_block_1
+theme: dupela
+region: features_first
+weight: 0
+provider: null
+plugin: 'views_block:dupela_smart_tiles-block_1'
+settings:
+  id: 'views_block:dupela_smart_tiles-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility: {  }
