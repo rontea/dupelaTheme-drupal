@@ -157,6 +157,7 @@ $breadcrumb = $breadcrumb_manager->build($route_match);
 // Get the breadcrumb links and assign them to the template variable.
 $variables['breadcrumb'] = $breadcrumb->getLinks();
 
+
 }
 
 
