@@ -1,75 +1,31 @@
 <?php 
 
 use Drupal\Core\Template\Attribute;
-// use in node
-use Drupal\Core\Breadcrumb\Breadcrumb;
-use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
-use Drupal\Core\Breadcrumb\BreadcrumbManager;
+
 
 function dupela_preprocess(&$variables, $hook) {
     $variables['base_path'] = base_path();
 }
 
+/** suggestiong twig */
 
 
-function dupela_theme_suggestions_menu_local_tasks_alter(array &$suggestions, array $variables){
-    $suggestions[] = sprintf('menu_local_tasks');
-}
+/** Hook Alter suggestion */
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    if ($hook == 'node') {
+      $node = $variables['elements']['#node'];
+      $suggestions[] = 'node__' . $node->getType() . '__' . $node->bundle() . '__' . $node->id();
+    }
+  }
 
- // breadcrumb
-// view view grid
+// breadcrumb
 function dupela_theme_suggestions_breadcrumb_alter(array &$suggestions, array $variables) {
     // If you want you can add a template suggestion for all views
     // based on their ID:
     $suggestions[] = sprintf('breadcrumb__dupela_breadcrumbs');
-}
-
-// view view grid
-function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('views_view_grid--dupela_smart_tiles', $variables['view']->id());
-  
-}
-// view view field
-function dupela_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-    $suggestions[] = sprintf('views_view_fields--dupela_smart_tiles', $variables['view']->id());
-}
-
-// form
-function dupela_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-    // If you want you can add a template suggestion for all views
-    // based on their ID:
-   
-    // Search top
-    if ( $variables['element']['#form_id'] === 'search_block_form') {
-        $suggestions[] = sprintf('form__search_block_form');
-        //dump($variables['element']);
-    }
-    // Login
-    if ( $variables['element']['#form_id'] === 'user_login_form') {
-        $suggestions[] = sprintf('form__user_login_form');
-        // dump($variables['element']);
-    }
-   // dump($variables['element']);
-   if ( $variables['element']['#form_id'] === 'search_form') {
-    $suggestions[] = sprintf('form__list_form');
-    // dump($variables['element']);
-    }
-
-   
-}
-// form element
-function dupela_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-    // auto generate suggention for input and submit
-    $element = $variables['element'];
-
-    if (isset($element['#attributes']['data-twig-suggestion'])) {
-        $suggestions[] = 'form_element__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
-    }
-    //dump($variables['element']);
 }
 
 
@@ -78,25 +34,33 @@ function dupela_theme_suggestions_input_alter(array &$suggestions, array $variab
     // If you want you can add a template suggestion for all views
     // based on their ID:
         
-   
-
-    // search input
-    if($variables['theme_hook_original'] == "input__search") {
-        $suggestions[] = sprintf('input__search__search_block_form');
-    }
-
-
-    // auto generate suggention for input and submit
+    // auto generate suggention for input and submit used in login form username, password and button
     $element = $variables['element'];
-
   
-  
-    if (isset($element['#attributes']['data-twig-suggestion'])) {
-       
-        $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];           
+    if (isset($element['#type']) && $element['#type'] === 'search') {
+        $suggestions[] = 'input__search';
     }
+ 
+}
+// views view
+function dupela_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
 
+    $view = $variables['view'];
     
+    $suggestions[] = 'views_view__' . $view->id();
+    
+}
+
+// views view grid
+function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
+
+    $view = $variables['view'];
+
+    // Add a suggestion based on the view's base table.
+    $suggestions[] = 'views_view_grid__' . $view->storage->get('base_table');
+  
+    // Add a suggestion based on the view's display ID.
+    $suggestions[] = 'views_view_grid__' . $view->storage->get('id');
 }
 
 
@@ -116,18 +80,14 @@ function dupela_preprocess_page(&$variables){
 
     /** Header Navigation */
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
-   
-
 
     /** Used in Front Page  */
     $variables['dupela_article_count'] = views_embed_view('dupela_article_count', 'block_1');
-
     $variables['dupela_article_in_works'] = views_embed_view('dupela_article_in_works', 'block_1');
     $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
     
     //footer and navigation 
-    $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
-    
+  
     $variables['site_name'] = $config->get('name');
     $variables['site_slogan'] = $config->get('slogan');
     
@@ -144,18 +104,6 @@ function dupela_preprocess_page(&$variables){
  */
 
 function dupela_preprocess_node(&$variables){
-
-// Get the current route match.
-$route_match = \Drupal::routeMatch();
-  
-// Get the breadcrumb builder.
-$breadcrumb_manager = \Drupal::service('breadcrumb');
-  
-// Build the breadcrumb for the current route match.
-$breadcrumb = $breadcrumb_manager->build($route_match);
-
-// Get the breadcrumb links and assign them to the template variable.
-$variables['breadcrumb'] = $breadcrumb->getLinks();
 
 
 }
@@ -175,11 +123,9 @@ function dupela_preprocess_block(&$variables){
 
     // Get the site details to display on twig under block
     $config = \Drupal::config('system.site');
-
     $variables['site_name'] = $config->get('name');
     $variables['site_slogan'] = $config->get('slogan');
-    $variables['site_logo'] = $config->get('logo');
-
+   
 }
 /**
  *  @file
@@ -192,9 +138,14 @@ function dupela_preprocess_region(&$variables){
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
     $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
     $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
+
+    // Get the site details to display on twig under block
+    $config = \Drupal::config('system.site');
+    $variables['site_name'] = $config->get('name');
+    $variables['site_slogan'] = $config->get('slogan');
+    
   
 }
-
 
 
 

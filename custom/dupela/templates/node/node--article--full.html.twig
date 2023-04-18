@@ -69,11 +69,7 @@
  */
 #}
 
-
-
 <div class="content-area container seperator color-lighten text-white mb-4" style="word-wrap: break-word;">
-    {{ breadcrumbs}}
-    
   {{ title_prefix }}
   {% if label and not page %}
     <h2{{ title_attributes }}>
@@ -143,9 +139,19 @@
                     </div>
                    -->
                     <div class="article">
+                        {{ content.field_image }}
+                        {{ content.field_upload_document}}
+                        
                         <article class="">
                             {{content.body}}
                         </article>
+                    </div>
+
+                    <div class="p-2">
+                    {{ content.field_external_url }}
+                    </div>
+                    <div class="p-2">
+                    {{ content.field_additional_format }}
                     </div>
 
                     <div class="article-information-read title-text-6">

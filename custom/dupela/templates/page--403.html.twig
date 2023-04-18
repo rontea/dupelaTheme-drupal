@@ -46,25 +46,25 @@
 
 
 <div class="content-area container seperator text-white mb-4 color-lighten">
-    {% if page.breadcrumb %}
-        {{ page.breadcrumb }}
-    {% endif %} 
 
-     
-  <div class="page-title">
-    {% if page.header %}
-     {{ page.header }}
-    {% endif %} 
-  </div>
-</div>
+{% if page.breadcrumb %}
+    {{ page.breadcrumb }}
+{% endif %} 
 
+ {% if page.header %}    
+    <div class="page-title">
+        {{ page.header }}
+    </div>
+{% endif %}    
 
 {# Page Content #}
-<div class="content-area mx-auto color-4 p-4">
 {% if page.content %}
     {{ page.content }} 
 {% endif %} 
+
+
 </div>
+
 
 
 {# footer #}

@@ -16,9 +16,21 @@
 #}
 {% if content %}
     <div class="row">
+
+        <div class="col-12 col-md-2">
+            <div class="footer-company-name pt-4 font-weight-bold text-color-light text-3">
+            {{ site_name }} 
+            </div>
+            <div class="footer-message caption">
+                {{ site_slogan }}
+            </div>
+        </div>
+
           {{ content }}
         <div class="col-6 col-sm-6  float-left">
-            <div class="footer-copyright mt-4 mb-4 caption text-color-light"> {{ dupela_year_reserved }}</div>
+            <div class="footer-copyright mt-4 mb-4 caption text-color-light">
+            <p> © {{ 'now' | date('Y') }} All Rights Reserved</p>
+            </div>
         </div>
 
         <div class="col-6 col-sm-6 footer-minimal">
