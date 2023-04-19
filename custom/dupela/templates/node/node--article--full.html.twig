@@ -70,6 +70,8 @@
 #}
 
 <div class="content-area container seperator color-lighten text-white mb-4" style="word-wrap: break-word;">
+
+
   {{ title_prefix }}
   {% if label and not page %}
     <h2{{ title_attributes }}>
@@ -119,6 +121,24 @@
 
 <div class="color-4 inset-top-2">
     <div class="content-area mx-auto ">
+
+{% if is_admin %}
+<div class="section">
+    {{ view_button }}
+            
+    {% if edit_button %}
+        {{ edit_button }}
+    {% endif %}
+    
+    {% if delete_button %}
+        {{ delete_button }}
+    {% endif %}
+
+    {% if revisions_link %}
+        {{ revisions_button }}
+    {% endif %}
+</div>
+{% endif %}
 
         <div class="container-fluid">
             <div class="row">

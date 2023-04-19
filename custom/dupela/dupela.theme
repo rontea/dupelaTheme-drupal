@@ -105,6 +105,90 @@ function dupela_preprocess_page(&$variables){
 
 function dupela_preprocess_node(&$variables){
 
+    // show the node edit link 
+    
+// Get the node object.
+$node = $variables['node'];
+
+    /** Links */
+
+    // Check if the user has permission to edit the node.
+    if ($node->access('update')) {
+    // Add an "Edit" link to the node.
+    $variables['edit_link'] = \Drupal\Core\Link::createFromRoute(t('Edit'), 'entity.node.edit_form', ['node' => $node->id()]);
+    }
+
+    // Check if the user has permission to delete the node.
+    if ($node->access('delete')) {
+    // Add a "Delete" link to the node.
+    $variables['delete_link'] = \Drupal\Core\Link::createFromRoute(t('Delete'), 'entity.node.delete_form', ['node' => $node->id()]);
+    }
+
+    // Check if the user has permission to view the revisions of the node.
+    if ($node->access('view revisions')) {
+    // Add a "Revisions" link to the node.
+    $variables['revisions_link'] = \Drupal\Core\Link::createFromRoute(t('Revisions'), 'entity.node.version_history', ['node' => $node->id()]);
+    }
+
+    // Add a "View" link to the node.
+    $variables['view_link'] = \Drupal\Core\Link::createFromRoute(t('View'), 'entity.node.canonical', ['node' => $node->id()]);
+
+
+
+
+
+    /** Buttons */
+    // Add a "Edit" link to the node.
+    if ($node->access('update')) {
+        $variables['edit_button'] = [
+            '#type' => 'link',
+            '#title' => t('Edit'),  
+            '#url' => \Drupal\Core\Url::fromRoute('entity.node.edit_form', ['node' => $node->id()]),
+            '#attributes' => [
+                'class' => ['btn', 'btn-primary'],
+            ],
+
+        ];
+    }
+
+    // Add a "delete" link to the node.
+    if ($node->access('delete')) {
+        $variables['delete_button'] = [
+            '#type' => 'link',
+            '#title' => t('Delete'),  
+            '#url' => \Drupal\Core\Url::fromRoute('entity.node.delete_form', ['node' => $node->id()]),
+            '#attributes' => [
+                'class' => ['btn', 'btn-primary'],
+            ],
+
+        ];
+    }
+
+        // Add a "revisions" link to the node.
+        if ($node->access('revisions')) {
+            $variables['revisions_button'] = [
+                '#type' => 'link',
+                '#title' => t('Revisions'),  
+                '#url' => \Drupal\Core\Url::fromRoute('entity.node.version_history', ['node' => $node->id()]),
+                '#attributes' => [
+                    'class' => ['btn', 'btn-primary'],
+                ],
+    
+            ];
+        }
+    
+
+
+    // Add a "View" link to the node.
+    $variables['view_button'] = [
+        '#type' => 'link',
+        '#title' => t('View'),  
+        '#url' => \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->id()]),
+        '#attributes' => [
+            'class' => ['btn', 'btn-primary'],
+        ],
+
+    ];
 
 }
 
@@ -141,6 +225,7 @@ function dupela_preprocess_region(&$variables){
 
     // Get the site details to display on twig under block
     $config = \Drupal::config('system.site');
+
     $variables['site_name'] = $config->get('name');
     $variables['site_slogan'] = $config->get('slogan');
     
