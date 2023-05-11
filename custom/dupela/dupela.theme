@@ -1,6 +1,7 @@
 <?php 
 
 use Drupal\Core\Template\Attribute;
+use Drupal\Core\Link;
 
 
 function dupela_preprocess(&$variables, $hook) {
@@ -63,7 +64,6 @@ function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, arr
     $suggestions[] = 'views_view_grid__' . $view->storage->get('id');
 }
 
-
 /**
  *  @file
  *  writing preprocess_page
@@ -75,8 +75,17 @@ function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, arr
  */
 
 function dupela_preprocess_page(&$variables){
+    try {
 
-    $config = \Drupal::config('system.site');
+        $config = \Drupal::config('system.site');
+        $variables['site_name'] = $config->get('name');
+        $variables['site_slogan'] = $config->get('slogan');
+        
+    }catch (Exception $e){
+        $log_message = 'Error: issue on preprocess page ' . $e->getMessage();
+        watchdog('dupela', $log_message, [], WATCHDOG_ERROR);
+    }
+  
 
     /** Header Navigation */
     $variables['dupela_icon_navigation'] = views_embed_view('dupela_icon_navigation', 'block_1');
@@ -88,9 +97,7 @@ function dupela_preprocess_page(&$variables){
     
     //footer and navigation 
   
-    $variables['site_name'] = $config->get('name');
-    $variables['site_slogan'] = $config->get('slogan');
-    
+
 }
 
 /**
@@ -111,65 +118,39 @@ function dupela_preprocess_node(&$variables){
 $node = $variables['node'];
 
     /** Links */
-
-    // Check if the user has permission to edit the node.
+    try {
+        // Check if the user has permission to edit the node.
     if ($node->access('update')) {
-    // Add an "Edit" link to the node.
-    $variables['edit_link'] = \Drupal\Core\Link::createFromRoute(t('Edit'), 'entity.node.edit_form', ['node' => $node->id()]);
-    }
-
-    // Check if the user has permission to delete the node.
-    if ($node->access('delete')) {
-    // Add a "Delete" link to the node.
-    $variables['delete_link'] = \Drupal\Core\Link::createFromRoute(t('Delete'), 'entity.node.delete_form', ['node' => $node->id()]);
-    }
-
-    // Check if the user has permission to view the revisions of the node.
-    if ($node->access('view revisions')) {
-    // Add a "Revisions" link to the node.
-    $variables['revisions_link'] = \Drupal\Core\Link::createFromRoute(t('Revisions'), 'entity.node.version_history', ['node' => $node->id()]);
-    }
-
-    // Add a "View" link to the node.
-    $variables['view_link'] = \Drupal\Core\Link::createFromRoute(t('View'), 'entity.node.canonical', ['node' => $node->id()]);
-
-
-
-
-
-    /** Buttons */
-    // Add a "Edit" link to the node.
-    if ($node->access('update')) {
-        $variables['edit_button'] = [
-            '#type' => 'link',
-            '#title' => t('Edit'),  
-            '#url' => \Drupal\Core\Url::fromRoute('entity.node.edit_form', ['node' => $node->id()]),
-            '#attributes' => [
-                'class' => ['btn', 'btn-primary'],
-            ],
-
-        ];
-    }
-
-    // Add a "delete" link to the node.
-    if ($node->access('delete')) {
-        $variables['delete_button'] = [
-            '#type' => 'link',
-            '#title' => t('Delete'),  
-            '#url' => \Drupal\Core\Url::fromRoute('entity.node.delete_form', ['node' => $node->id()]),
-            '#attributes' => [
-                'class' => ['btn', 'btn-primary'],
-            ],
-
-        ];
-    }
-
-        // Add a "revisions" link to the node.
-        if ($node->access('revisions')) {
-            $variables['revisions_button'] = [
+        // Add an "Edit" link to the node.
+        $variables['edit_link'] = \Drupal\Core\Link::createFromRoute(t('Edit'), 'entity.node.edit_form', ['node' => $node->id()]);
+        }
+    
+        // Check if the user has permission to delete the node.
+        if ($node->access('delete')) {
+        // Add a "Delete" link to the node.
+        $variables['delete_link'] = \Drupal\Core\Link::createFromRoute(t('Delete'), 'entity.node.delete_form', ['node' => $node->id()]);
+        }
+    
+        // Check if the user has permission to view the revisions of the node.
+        if ($node->access('view revisions')) {
+        // Add a "Revisions" link to the node.
+        $variables['revisions_link'] = \Drupal\Core\Link::createFromRoute(t('Revisions'), 'entity.node.version_history', ['node' => $node->id()]);
+        }
+    
+        // Add a "View" link to the node.
+        $variables['view_link'] = \Drupal\Core\Link::createFromRoute(t('View'), 'entity.node.canonical', ['node' => $node->id()]);
+    
+    
+    
+    
+    
+        /** Buttons */
+        // Add a "Edit" link to the node.
+        if ($node->access('update')) {
+            $variables['edit_button'] = [
                 '#type' => 'link',
-                '#title' => t('Revisions'),  
-                '#url' => \Drupal\Core\Url::fromRoute('entity.node.version_history', ['node' => $node->id()]),
+                '#title' => t('Edit'),  
+                '#url' => \Drupal\Core\Url::fromRoute('entity.node.edit_form', ['node' => $node->id()]),
                 '#attributes' => [
                     'class' => ['btn', 'btn-primary'],
                 ],
@@ -177,18 +158,50 @@ $node = $variables['node'];
             ];
         }
     
+        // Add a "delete" link to the node.
+        if ($node->access('delete')) {
+            $variables['delete_button'] = [
+                '#type' => 'link',
+                '#title' => t('Delete'),  
+                '#url' => \Drupal\Core\Url::fromRoute('entity.node.delete_form', ['node' => $node->id()]),
+                '#attributes' => [
+                    'class' => ['btn', 'btn-primary'],
+                ],
+    
+            ];
+        }
+    
+            // Add a "revisions" link to the node.
+            if ($node->access('revisions')) {
+                $variables['revisions_button'] = [
+                    '#type' => 'link',
+                    '#title' => t('Revisions'),  
+                    '#url' => \Drupal\Core\Url::fromRoute('entity.node.version_history', ['node' => $node->id()]),
+                    '#attributes' => [
+                        'class' => ['btn', 'btn-primary'],
+                    ],
+        
+                ];
+            }
+        
+    
+    
+        // Add a "View" link to the node.
+        $variables['view_button'] = [
+            '#type' => 'link',
+            '#title' => t('View'),  
+            '#url' => \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->id()]),
+            '#attributes' => [
+                'class' => ['btn', 'btn-primary'],
+            ],
+    
+        ];
 
-
-    // Add a "View" link to the node.
-    $variables['view_button'] = [
-        '#type' => 'link',
-        '#title' => t('View'),  
-        '#url' => \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $node->id()]),
-        '#attributes' => [
-            'class' => ['btn', 'btn-primary'],
-        ],
-
-    ];
+    }catch (Exception $e){
+        $log_message = 'Error: issue on preprocess node ' . $e->getMessage();
+        watchdog('dupela', $log_message, [], WATCHDOG_ERROR);
+    }
+    
 
 }
 
@@ -206,10 +219,17 @@ $node = $variables['node'];
 function dupela_preprocess_block(&$variables){
 
     // Get the site details to display on twig under block
-    $config = \Drupal::config('system.site');
-    $variables['site_name'] = $config->get('name');
-    $variables['site_slogan'] = $config->get('slogan');
-   
+    try{
+
+        $config = \Drupal::config('system.site');
+        $variables['site_name'] = $config->get('name');
+        $variables['site_slogan'] = $config->get('slogan');
+       
+    }catch(Exception $e) {
+        $log_message = 'Error: issue on preprocess block ' . $e->getMessage();
+        watchdog('dupela', $log_message, [], WATCHDOG_ERROR);
+    } 
+
 }
 /**
  *  @file
@@ -224,12 +244,18 @@ function dupela_preprocess_region(&$variables){
     $variables['dupela_year_reserved'] = views_embed_view('dupela_year_reserved', 'block_1');
 
     // Get the site details to display on twig under block
-    $config = \Drupal::config('system.site');
+    try {
 
-    $variables['site_name'] = $config->get('name');
-    $variables['site_slogan'] = $config->get('slogan');
+        $config = \Drupal::config('system.site');
+
+        $variables['site_name'] = $config->get('name');
+        $variables['site_slogan'] = $config->get('slogan');
+        
+    }catch(Exception $e) {
+        $log_message = 'Error: issue on preprocess node ' . $e->getMessage();
+        watchdog('dupela', $log_message, [], WATCHDOG_ERROR);
+    }
     
-  
 }
 
 

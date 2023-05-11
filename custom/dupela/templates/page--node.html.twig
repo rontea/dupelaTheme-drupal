@@ -49,38 +49,25 @@
     {% if page.breadcrumb %}
         {{ page.breadcrumb }}
     {% endif %} 
-  <div class="page-title">
-    {% if page.header%}
-     {{ page.header }}
-    {% endif %}
-  </div>
+
+    <div class="page-title">
+        {% if page.header%}
+        {{ page.header }}
+        {% endif %}
+    </div>
 </div>
 
-{% if page.content_article %}
-    <div class="content-area container color-lighten text-white mb-4">
+{% if page.content %}
+    <div class="content-area container">
         <div class="p-2">
-            {% if page.content_article %}
-                {{page.content_article}}
-            {% endif %}
-
-         
-            
+      
+            {{ page.content }}
+     
         </div>
     </div>
 {% endif %}
 
-{% if page.content %}
-    {{ page.content }}
-{% endif %} 
 
-<div class="color-4">
-    <div class="content-area mx-auto">
-        {% if page.footer_first %}
-            {{ page.footer_first }}
-            {# subcription email #}
-        {% endif %}
-    </div>
-</div>
 {# footer #}
 {% include '@dupela/includes/footer/footer.html.twig' %}
 {# end footer #}

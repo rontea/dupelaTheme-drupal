@@ -39,36 +39,33 @@
  * @see html.html.twig
  */
 #}
-<div class="back-effect"></div>
+
 {# Header #}
 {% include '@dupela/includes/header/header.html.twig' %}
 {# end Header #}
 
-
+<div class="back-effect"></div>
 <div class="content-area container seperator text-white mb-4 color-lighten">
-    {% if page.breadcrumb %}
-        {{ page.breadcrumb }}
-    {% endif %} 
+  {% if page.breadcrumb %}
+    {{ page.breadcrumb }}
+  {% endif %} 
 
-     
   <div class="page-title">
-    {% if page.header %}
-     {{ page.header }}
-    {% endif %} 
+  {% if page.header %}  
+      {{ page.header }}
+  {% endif %} 
   </div>
 </div>
-
-
 {# Page Content #}
-<div class="content-area mx-auto color-4 p-4">
+<div class="mx-auto color-4 p-4">
 {% if page.content %}
+
     {{ page.content }} 
+
 {% endif %} 
 </div>
 
-
 {# footer #}
-{% include '@dupela/includes/footer/footer.html.twig' %}
+    {% include '@dupela/includes/footer/footer.html.twig' %}
 {# end footer #}
-
 
