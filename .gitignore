@@ -1,4 +1,6 @@
-#file
-README.txt
+/README.txt
+/.git
 #contrib folder
 **/contrib
+#Archieved
+**/Archieved

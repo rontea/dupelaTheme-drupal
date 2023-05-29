@@ -1,9 +1,0 @@
-#file
-drupal9testTheme.code-workspace
-README.txt
-#contrib folder
-**/contrib
-#node Module
-/node_modules
-/build
-/images

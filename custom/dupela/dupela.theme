@@ -3,6 +3,13 @@
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Link;
 
+/**
+ * Implements hook_update_N().
+ */
+function dupela_theme_update_9001() {
+    // Perform any necessary updates to your theme here.
+    // This function will be called when the update is run.
+}
 
 function dupela_preprocess(&$variables, $hook) {
     $variables['base_path'] = base_path();
@@ -10,6 +17,7 @@ function dupela_preprocess(&$variables, $hook) {
 
 /** suggestiong twig */
 
+  
 
 /** Hook Alter suggestion */
 /**
@@ -20,6 +28,31 @@ function dupela_theme_suggestions_alter(array &$suggestions, array $variables, $
       $node = $variables['elements']['#node'];
       $suggestions[] = 'node__' . $node->getType() . '__' . $node->bundle() . '__' . $node->id();
     }
+  }
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ */
+function dupela_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    // Get the current path.
+    $current_path = \Drupal::service('path.current')->getPath();
+  
+    // Check if the current path matches the desired path.
+    if ($current_path == 'your/custom/path') {
+      // Add a theme suggestion for the desired page template.
+      $suggestions[] = 'page__custom_template';
+    }
+  }
+
+
+/**
+ * Implements hook_block_suggestions_alter().
+ */
+function dupela_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+    // Check if the current block is of type 'views_block'.
+    // Get the current block.
+    $block = $variables['elements']['#id'];
+    // Add a suggestion based on the block's ID.
+    $suggestions[] = 'block__' . $block;
   }
 
 // breadcrumb
@@ -51,6 +84,14 @@ function dupela_theme_suggestions_views_view_alter(array &$suggestions, array $v
     $suggestions[] = 'views_view__' . $view->id();
     
 }
+function dupela_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
+
+    $view = $variables['view'];
+
+    // Add a suggestion based on the view ID and display ID.
+    $suggestions[] = 'views_view_unformatted__' . $view->id() . '__' . $view->current_display;
+}
+
 
 // views view grid
 function dupela_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
@@ -95,8 +136,14 @@ function dupela_preprocess_page(&$variables){
     $variables['dupela_article_in_works'] = views_embed_view('dupela_article_in_works', 'block_1');
     $variables['dupela_article_list_home'] = views_embed_view('dupela_article_list_home', 'block_1');
     
+    /**Category List */
+
+    $variables['nuggets_category_list'] = views_embed_view('nuggets_category_list', 'block_1');
+
+
     //footer and navigation 
-  
+    
+
 
 }
 
@@ -202,7 +249,11 @@ $node = $variables['node'];
         watchdog('dupela', $log_message, [], WATCHDOG_ERROR);
     }
     
+    /**Related Article  */
 
+    $variables['related_content'] = views_embed_view('related_content', 'block_1');
+
+    
 }
 
 
@@ -224,6 +275,8 @@ function dupela_preprocess_block(&$variables){
         $config = \Drupal::config('system.site');
         $variables['site_name'] = $config->get('name');
         $variables['site_slogan'] = $config->get('slogan');
+
+
        
     }catch(Exception $e) {
         $log_message = 'Error: issue on preprocess block ' . $e->getMessage();
