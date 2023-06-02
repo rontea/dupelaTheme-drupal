@@ -17,19 +17,7 @@
  * @ingroup themeable
  */
 #}
-{% if title %}
-  <h3>{{ title }}</h3>
-{% endif %}
-  {%
-    set row_classes = [
-      default_row_class ? 'views-row',
-    ]
-  %}
 
+{% extends 'views-view-unformatted--list-nugget-category-1--block-1.html.twig' %}
+    
 
-{% for row in rows %} 
-{# Get the Taxonomy term name field value #}
-  {{ row.field_nuggets_category.content }}
-  
-{% endfor %}
-  

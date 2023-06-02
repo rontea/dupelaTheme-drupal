@@ -141,10 +141,12 @@ function dupela_preprocess_page(&$variables){
     $variables['nuggets_category_list'] = views_embed_view('nuggets_category_list', 'block_1');
 
 
+    /**Related Article  */
+
+    $variables['nuggets_content'] = views_embed_view('related_content', 'block_2');
+
     //footer and navigation 
     
-
-
 }
 
 /**
